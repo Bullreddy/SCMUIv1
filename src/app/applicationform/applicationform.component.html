@@ -1,0 +1,248 @@
+<script>
+$("#tabs").tabs();
+//-- Modal has finished being hidden
+$('#newConsigneeModal').on('hidden.bs.modal', function (e) {
+  //$(this).find('form')[0].reset();
+});
+
+$("#newConsigneeReset").on("click", function(){$('#newConsigneeModal').find("form")[0].reset();});
+$("#newConsigneeSubmit").on("click", function(){submitNewConsignee();});
+function submitNewConsignee() {
+    alert("submit");
+  $("#new_comments").hide();
+}
+function saveAdmission(){
+    alert("admission");
+}
+</script>
+  <div class="panel panel-primary">
+    <div class="panel-heading">Application Form</div>
+    <div class="panel-body">
+      <!--form action="/action_page.php">
+  <div class="form-group">
+    <label for="email">Email address:</label>
+    <input type="email" class="form-control" id="email">
+  </div>
+  <div class="form-group">
+    <label for="pwd">Password:</label>
+    <input type="password" class="form-control" id="pwd">
+  </div>
+  <div class="checkbox">
+    <label><input type="checkbox"> Remember me</label>
+  </div>
+  <button type="submit" class="btn btn-default">Submit</button>
+</form-->
+     <form class="form-horizontal" [formGroup]="admissionForm" (ngSubmit)="saveAdmission()" novalidate>
+
+        <div class="form-group form-group-sm">
+            <!-- left column -->
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label for="admissionNo" class="col-sm-4 control-label">Admission No</label>
+                    <div class="col-sm-7">
+                        <input type="text" class="form-control" formControlName ="admissionNo" id="admissionNo" placeholder="">
+                    </div>
+                    <div *ngIf="admissionForm.controls['admissionNo'].invalid && (admissionForm.controls['admissionNo'].dirty || admissionForm.controls['admissionNo'].touched)" class="col-sm-7 alert alert-danger">
+                        <div *ngIf="admissionForm.controls['admissionNo'].errors.required">
+                            Admission No is required.
+                        </div>   
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="name" class="col-sm-4 control-label bg-danger">Name</label>
+                    <div class="col-sm-7">
+                        <input type="text" class="form-control" formControlName ="name" id="name" placeholder="" required>
+                    </div>
+                    <div *ngIf="admissionForm.controls['name'].invalid && (admissionForm.controls['name'].dirty || admissionForm.controls['name'].touched)" class="col-sm-7 alert alert-danger">
+                    <div *ngIf="admissionForm.controls['name'].errors.required">
+                        Name is required.
+                    </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="fatherName" class="col-sm-4 control-label">Father Name</label>
+                    <div class="col-sm-7">
+                        <input type="text" class="form-control" formControlName ="fatherName" id="fatherName" placeholder="">
+                    </div>
+                    <div *ngIf="admissionForm.controls['fatherName'].invalid && (admissionForm.controls['fatherName'].dirty || admissionForm.controls['fatherName'].touched)" class="col-sm-7 alert alert-danger">
+                        <div *ngIf="admissionForm.controls['fatherName'].errors.required">
+                            fatherName is required.
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="mobileNo" class="col-sm-4 control-label">Mobile No</label>
+                    <div class="col-sm-7">
+                        <input type="text" class="form-control" formControlName ="mobileNo" id="mobileNo" placeholder="">
+                    </div>
+                    <div *ngIf="admissionForm.controls['mobileNo'].invalid && (admissionForm.controls['mobileNo'].dirty || admissionForm.controls['mobileNo'].touched)" class="col-sm-7 alert alert-danger">
+                        <div *ngIf="admissionForm.controls['mobileNo'].errors.required">
+                            mobileNo is required.
+                        </div>    
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="trade" class="col-sm-4 control-label">Trade</label>
+                    <div class="col-sm-7">
+                        <select class="form-control" formControlName ="tradeID" id="tradeID" >
+                            <option *ngFor="let trade of trades" value="{{trade.id}}">{{trade.name}}</option>
+                        </select>
+                    </div>
+                    <div *ngIf="admissionForm.controls['tradeID'].invalid && (admissionForm.controls['tradeID'].dirty || admissionForm.controls['tradeID'].touched)" class="col-sm-7 alert alert-danger">
+                        <div *ngIf="admissionForm.controls['tradeID'].errors.required">
+                            tradeID is required.
+                        </div>    
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="caste" class="col-sm-4 control-label">Caste</label>
+                    <div class="col-sm-7">
+                        <select class="form-control" formControlName ="casteID" id="casteID" >
+                            <option *ngFor="let caste of castes" value="{{caste.id}}">{{caste.name}}</option>
+                        </select>
+                    </div>
+                    <div *ngIf="admissionForm.controls['casteID'].invalid && (admissionForm.controls['casteID'].dirty || admissionForm.controls['casteID'].touched)" class="col-sm-7 alert alert-danger">
+                        <div *ngIf="admissionForm.controls['casteID'].errors.required">
+                            casteID is required.
+                        </div>    
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="address" class="col-sm-4 control-label bg-danger">Address</label>
+                    <div class="col-sm-7">
+                        <input type="text" class="form-control" formControlName ="address" id="address" placeholder="">
+                    </div>
+                    <div *ngIf="admissionForm.controls['address'].invalid && (admissionForm.controls['address'].dirty || admissionForm.controls['address'].touched)" class="col-sm-7 alert alert-danger">
+                        <div *ngIf="admissionForm.controls['address'].errors.required">
+                            address is required.
+                        </div>    
+                    </div>
+                </div>
+                <div class="form-group">
+                        <label for="type" class="col-sm-4 control-label">Type</label>
+                        <div class="col-sm-7">
+                            <select class="form-control" formControlName ="typeID" id="typeID" >
+                                <option *ngFor="let type of types" value="{{type.id}}">{{type.name}}</option>
+                            </select>
+                        </div>
+                        <div *ngIf="admissionForm.controls['typeID'].invalid && (admissionForm.controls['typeID'].dirty || admissionForm.controls['typeID'].touched)" class="col-sm-7 alert alert-danger">
+                            <div *ngIf="admissionForm.controls['typeID'].errors.required">
+                                typeID is required.
+                            </div>    
+                        </div>
+                </div>
+                <div class="form-group">
+                    <label for="phase" class="col-sm-4 control-label">Phase</label>
+                    <div class="col-sm-7">
+                        <select class="form-control" formControlName ="phaseID" id="phaseID" >
+                            <option *ngFor="let phase of phases" value="{{phase.id}}">{{phase.name}}</option>
+                        </select>
+                    </div>
+                    <div *ngIf="admissionForm.controls['phaseID'].invalid && (admissionForm.controls['phaseID'].dirty || admissionForm.controls['phaseID'].touched)" class="col-sm-7 alert alert-danger">
+                        <div *ngIf="admissionForm.controls['phaseID'].errors.required">
+                            phaseID is required.
+                        </div>    
+                    </div>
+            </div>
+            </div>
+
+            <!-- right column -->
+            <div class="col-sm-6">
+                    <div class="form-group">
+                        <label for="regNo" class="col-sm-4 control-label">Registration No</label>
+                        <div class="col-sm-7">
+                            <input type="text" class="form-control" formControlName ="regNo" id="regNo" placeholder="">
+                        </div>
+                        <div *ngIf="admissionForm.controls['regNo'].invalid && (admissionForm.controls['regNo'].dirty || admissionForm.controls['regNo'].touched)" class="col-sm-7 alert alert-danger">
+                            <div *ngIf="admissionForm.controls['regNo'].errors.required">
+                                regNo is required.
+                            </div>    
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="mailID" class="col-sm-4 control-label">Mail ID</label>
+                        <div class="col-sm-7">
+                            <input type="text" class="form-control" formControlName ="mailID" id="mailID" placeholder="">
+                        </div>
+                        <div *ngIf="admissionForm.controls['mailID'].invalid && (admissionForm.controls['mailID'].dirty || admissionForm.controls['mailID'].touched)" class="col-sm-7 alert alert-danger">
+                            <div *ngIf="admissionForm.controls['mailID'].errors.required">
+                                mailID is required.
+                            </div>    
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="motherName" class="col-sm-4 control-label">Mother Name</label>
+                        <div class="col-sm-7">
+                            <input type="text" class="form-control" formControlName ="motherName" id="motherName" placeholder="">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="alternateMobileNo" class="col-sm-4 control-label">Alternate Mobile No</label>
+                        <div class="col-sm-7">
+                            <input type="text" class="form-control" formControlName ="alternateMobileNo" id="alternateMobileNo" placeholder="">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="aadharNo" class="col-sm-4 control-label">Aadhar NO</label>
+                        <div class="col-sm-7">
+                            <input type="text" class="form-control" formControlName ="aadharNo" id="aadharNo" placeholder="">
+                        </div>
+                        <div *ngIf="admissionForm.controls['aadharNo'].invalid && (admissionForm.controls['aadharNo'].dirty || admissionForm.controls['aadharNo'].touched)" class="col-sm-7 alert alert-danger">
+                            <div *ngIf="admissionForm.controls['aadharNo'].errors.required">
+                                aadharNo is required.
+                            </div>    
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="dob" class="col-sm-4 control-label">DOB</label>
+                        <div class="col-sm-7">
+                            <input type="text" class="form-control" formControlName ="dob" id="dob" placeholder="">
+                        </div>
+                        <div *ngIf="admissionForm.controls['dob'].invalid && (admissionForm.controls['dob'].dirty || admissionForm.controls['dob'].touched)" class="col-sm-7 alert alert-danger">
+                            <div *ngIf="admissionForm.controls['dob'].errors.required">
+                                dob is required.
+                            </div>    
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="category" class="col-sm-4 control-label">Category</label>
+                        <div class="col-sm-7">
+                            <input type="text" class="form-control" formControlName ="category" id="category" placeholder="">
+                        </div>
+                        <div *ngIf="admissionForm.controls['category'].invalid && (admissionForm.controls['category'].dirty || admissionForm.controls['category'].touched)" class="col-sm-7 alert alert-danger">
+                            <div *ngIf="admissionForm.controls['category'].errors.required">
+                                category is required.
+                            </div>    
+                        </div>
+                    </div>
+                    <div class="form-group">
+                            <label for="academicYearID" class="col-sm-4 control-label">Academic Year</label>
+                            <div class="col-sm-7">
+                                <select class="form-control" formControlName ="academicYearID" id="academicYearID" >
+                                    <option *ngFor="let academicYear of academicYears" value="{{academicYear.id}}">{{academicYear.name}}</option>
+                                </select>
+                            </div>
+                    </div>
+            </div>
+        </div>
+
+
+
+      <!-- Modal Footer -->
+            <div class="form-group">
+                <button type="reset" class="btn btn-default" id="newConsigneeReset">Reset</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary" id="newConsigneeSubmit">Create Record</button>
+            </div><!-- End Modal Footer -->
+        
+            <!--- Log the FormGroup values to see if the binding is working -->
+            <p>Form value {{ admissionForm.value | json }} </p>
+            <p> Form status {{ admissionForm.status | json}} </p>
+
+
+
+    </form>
+
+    </div>
+  </div>
