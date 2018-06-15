@@ -21,28 +21,16 @@
           [sortable]="true">
       </data-table-column>
       <data-table-column
-          property="'mobileNo'"
+          property="mobileNo"
           header="Mobile number"
           width="150px">
       </data-table-column>
       <data-table-column
           [property]="'caste'"
           [header]="'Caste'">
-      </data-table-column>
-      <data-table-column
-          [property]="'active'"
-          [header]="'Active'"
-          [width]="100"
-          [resizable]="true">
-          <ng-template #dataTableHeader let-item="item">
-              <span style="color: rgb(232, 0, 0)">Active</span>
-          </ng-template>
           <ng-template #dataTableCell let-item="item">
-              <span style="color: grey">
-              <span class="fa fa-check" *ngIf="item.active"></span>
-              <span class="fa fa-times" *ngIf="!item.active"></span>
-              </span>
+              <span *ngIf="item.casteID">{{item.caste.name}}</span>
           </ng-template>
       </data-table-column>
-  </data-table>
+    </data-table>
 </div>
