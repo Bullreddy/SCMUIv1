@@ -21,7 +21,7 @@ export class StudentlistComponent implements OnInit {
 
   ngOnInit(){
       
-      this.students = this.studentService.students
+      this.students = this.studentService.getStudents()
       console.log(this.students)
       this.itemResource = new DataTableResource(this.students);
       this.itemResource.count().then(count => this.itemCount = count);
