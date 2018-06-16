@@ -8,6 +8,7 @@ import { RouterModule } from '@angular/router';
 import { ClassificationService } from './classification.service'
 import { StudentService } from './service/studentservice.service'
 import { HttpClientModule } from '@angular/common/http';
+import { HttpModule } from '@angular/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { StudentlistComponent } from './studentlist/studentlist.component';
 import { DataTableModule } from 'angular5-data-table';
@@ -19,7 +20,7 @@ import { DataTableModule } from 'angular5-data-table';
   ],
   imports: [
     BrowserModule,
-    HttpClientModule,
+    HttpClientModule,HttpModule,
     ReactiveFormsModule,DataTableModule,
     RouterModule.forRoot([
       {

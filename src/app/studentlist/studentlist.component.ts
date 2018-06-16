@@ -44,4 +44,8 @@ export class StudentlistComponent implements OnInit {
     return item.jobTitle;
   }
 
+  exportStudents(){
+      this.studentService.downloadFile()
+  }
+
 }
