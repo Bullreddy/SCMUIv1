@@ -1,4 +1,8 @@
-/* CSS used here will be applied after bootstrap.css */
-.modal-80p {
- }   width:80%; /* 80% of page to provide space for labels */
-  
+@import '~bootstrap/dist/css/bootstrap.min.css';
+@import '~open-iconic/font/css/open-iconic-bootstrap.css';
+ .form-horizontal .control-label{
+    text-align:left !important; 
+ }
+ select.form-control {
+     height:40px; 
+}

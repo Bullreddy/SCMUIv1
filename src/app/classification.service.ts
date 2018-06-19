@@ -2,6 +2,7 @@
 import { Injectable } from '@angular/core';
 import { Headers} from '@angular/http'
 import { HttpClient,HttpHeaders } from '@angular/common/http';
+import { Globals } from './components/globals';
 
 @Injectable()
 export class ClassificationService {
@@ -15,7 +16,7 @@ export class ClassificationService {
   public types: Array<{name: string, id: number}> = [];
 
 
-  constructor(private http:HttpClient) {
+  constructor(private http:HttpClient,private globals: Globals) {
     this.getClassifications();
   }
 
@@ -31,7 +32,7 @@ export class ClassificationService {
             "CASTE","PHASE","TRADE","ACADEMIC_YEAR","TYPE"
         ]
       }
-       this.http.post('http://localhost:8080/services/rest/classifications/getClassifications',
+       this.http.post(this.globals.baseurl+'/services/rest/classifications/getClassifications',
           JSON.stringify(params),this._options).subscribe(res => {
        //this.classificationData = JSON.stringify(res);
        this.prepareUIDropdownData(res);
@@ -57,7 +58,7 @@ export class ClassificationService {
 
 
   saveAdmission(user){
-       this.http.post('http://localhost:8080/student/saveStudent',user).subscribe(res => {
+       this.http.post(this.globals.baseurl+'/student/saveStudent',user).subscribe(res => {
           console.log(res);
         },
         err => {

@@ -2,18 +2,19 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ResponseContentType,RequestOptions,Http,Response } from '@angular/http';
 import { saveAs } from 'file-saver/FileSaver';
+import { Globals } from '../components/globals';
 
 @Injectable()
 export class StudentService {
 
   public students :  any;  
 
-  constructor(private http:Http,private httpClient:HttpClient) { 
+  constructor(private http:Http,private httpClient:HttpClient,private globals:Globals) { 
 
   }
 
   getStudents() {
-     this.httpClient.get('http://localhost:8080/student/getStudents')
+     this.httpClient.get(this.globals.baseurl+'/student/getStudents')
                         .subscribe(res => {
      this.students = res;
   });
@@ -21,17 +22,7 @@ export class StudentService {
   }
 
   exportStudents() {
-    alert("exportstudnets")
-  /*  this.http.get('http://localhost:8080/student/exportStudents',{
-      responseType: ResponseContentType.Blob
-    }).map()
-                       .subscribe(data => {
-                         console.log(data)
-                        var blob = new Blob([data], {
-                          type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
-                      });
-                      FileSaver.saveAs(blob, 'File_Name_With_Some_Unique_Id_Time' + '.xlsx');
-  });*/
+
   return this.downloadFile();
   }
 
@@ -43,7 +34,7 @@ saveFile = (blobContent: Blob, fileName: string) => {
 };
 
   downloadFile() {
-    const url = `http://localhost:8080/student/exportStudents`;
+    const url = this.globals.baseurl+`/student/exportStudents`;
     const options = new RequestOptions({responseType: ResponseContentType.Blob });
 
     this.http.get(url, options).subscribe(res => {

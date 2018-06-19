@@ -3,6 +3,8 @@ import { ClassificationService } from '../classification.service';
 import { Student } from '../model/Student';
 import { HttpClient } from '@angular/common/http';
 import { FormControl,FormGroup,Validators } from '@angular/forms';
+import {NgbdDatepickerPopup} from '../components/datepicker'
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-applicationform',
@@ -24,12 +26,33 @@ export class ApplicationformComponent implements OnInit {
   constructor(private classificationService:ClassificationService,private http: HttpClient) { }
 
   public saveAdmission() {
+    this.showValidationErrors();
     if(this.admissionForm.valid) {
         this.student = this.admissionForm.value;
         console.log(this.student);
         this.classificationService.saveAdmission(this.student);
 
     }
+  }
+
+  public showValidationErrors(){
+    this.admissionForm.controls['name'].markAsTouched()
+    this.admissionForm.controls['admissionNo'].markAsTouched()
+    this.admissionForm.controls['mobileNo'].markAsTouched()
+    this.admissionForm.controls['fatherName'].markAsTouched()
+    this.admissionForm.controls['tradeID'].markAsTouched()
+    this.admissionForm.controls['casteID'].markAsTouched()
+    this.admissionForm.controls['phaseID'].markAsTouched()
+    this.admissionForm.controls['address'].markAsTouched()
+    this.admissionForm.controls['typeID'].markAsTouched()
+    this.admissionForm.controls['regNo'].markAsTouched()
+    this.admissionForm.controls['mailID'].markAsTouched()
+    this.admissionForm.controls['motherName'].markAsTouched()
+    this.admissionForm.controls['alternateMobileNo'].markAsTouched()
+    this.admissionForm.controls['aadharNo'].markAsTouched()
+    this.admissionForm.controls['dob'].markAsTouched()
+    this.admissionForm.controls['category'].markAsTouched()
+    this.admissionForm.controls['academicYearID'].markAsTouched()
   }
 
   ngOnInit() {

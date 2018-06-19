@@ -1,21 +1,10 @@
 <script>
-$("#tabs").tabs();
-//-- Modal has finished being hidden
-$('#newConsigneeModal').on('hidden.bs.modal', function (e) {
-  //$(this).find('form')[0].reset();
+    $('.open-datetimepicker').click(function(event){
+    event.preventDefault();
+    $('#datetimepicker').click();
 });
-
-$("#newConsigneeReset").on("click", function(){$('#newConsigneeModal').find("form")[0].reset();});
-$("#newConsigneeSubmit").on("click", function(){submitNewConsignee();});
-function submitNewConsignee() {
-    alert("submit");
-  $("#new_comments").hide();
-}
-function saveAdmission(){
-    alert("admission");
-}
 </script>
-  <div class="panel panel-primary">
+<div class="panel panel-primary">
     <div class="panel-heading">Application Form</div>
     <div class="panel-body">
       <!--form action="/action_page.php">
@@ -32,6 +21,7 @@ function saveAdmission(){
   </div>
   <button type="submit" class="btn btn-default">Submit</button>
 </form-->
+
      <form class="form-horizontal" [formGroup]="admissionForm" (ngSubmit)="saveAdmission()" novalidate>
 
         <div class="form-group form-group-sm">
@@ -49,7 +39,7 @@ function saveAdmission(){
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="name" class="col-sm-4 control-label bg-danger">Name</label>
+                    <label for="name" class="col-sm-4 control-label">Name</label>
                     <div class="col-sm-7">
                         <input type="text" class="form-control" formControlName ="name" id="name" placeholder="" required>
                     </div>
@@ -109,7 +99,7 @@ function saveAdmission(){
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="address" class="col-sm-4 control-label bg-danger">Address</label>
+                    <label for="address" class="col-sm-4 control-label">Address</label>
                     <div class="col-sm-7">
                         <input type="text" class="form-control" formControlName ="address" id="address" placeholder="">
                     </div>
@@ -197,7 +187,7 @@ function saveAdmission(){
                     <div class="form-group">
                         <label for="dob" class="col-sm-4 control-label">DOB</label>
                         <div class="col-sm-7">
-                            <input type="text" class="form-control" formControlName ="dob" id="dob" placeholder="">
+                            <input type="date" class="form-control" formControlName ="dob" id="dob" placeholder="">
                         </div>
                         <div *ngIf="admissionForm.controls['dob'].invalid && (admissionForm.controls['dob'].dirty || admissionForm.controls['dob'].touched)" class="col-sm-7 alert alert-danger">
                             <div *ngIf="admissionForm.controls['dob'].errors.required">
@@ -232,15 +222,9 @@ function saveAdmission(){
       <!-- Modal Footer -->
             <div class="form-group">
                 <button type="reset" class="btn btn-default" id="newConsigneeReset">Reset</button>
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                 <button type="submit" class="btn btn-primary" id="newConsigneeSubmit">Create Record</button>
             </div><!-- End Modal Footer -->
         
-            <!--- Log the FormGroup values to see if the binding is working -->
-            <p>Form value {{ admissionForm.value | json }} </p>
-            <p> Form status {{ admissionForm.status | json}} </p>
-
-
 
     </form>
 
