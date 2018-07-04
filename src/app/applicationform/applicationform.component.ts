@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { FormControl,FormGroup,Validators } from '@angular/forms';
 import {NgbdDatepickerPopup} from '../components/datepicker'
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { DataTableResource } from 'angular5-data-table';
 
 @Component({
   selector: 'app-applicationform',
@@ -13,13 +14,15 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 })
 export class ApplicationformComponent implements OnInit {
 
-
+  itemResource;
+  certificates : any;
   admissionForm: FormGroup;
   public company:string[];
   public phases: Array<{name: string, id: number}> = [];
   public castes: Array<{name: string, id: number}> = [];
   public trades: Array<{name: string, id: number}> = [];
   public types: Array<{name: string, id: number}> = [];
+  public scholarships: Array<{name: string, id: number}> = [];
   public academicYears: Array<{name: string, id: number}> = [];
   public classificationData:string;
   public student:Student;
@@ -58,7 +61,7 @@ export class ApplicationformComponent implements OnInit {
   ngOnInit() {
     this.admissionForm = new FormGroup({
       admissionNo: new FormControl('', Validators.required),
-      mobileNo:new FormControl('', Validators.required),
+      mobileNo:new FormControl('', [Validators.required]),
       fatherName:new FormControl('', Validators.required),
       name: new FormControl('', Validators.required),
       tradeID: new FormControl('', Validators.required),
@@ -73,7 +76,8 @@ export class ApplicationformComponent implements OnInit {
       aadharNo: new FormControl(),
       dob: new FormControl('', Validators.required),
       category: new FormControl('', Validators.required),
-      academicYearID: new FormControl('', Validators.required)
+      academicYearID: new FormControl('', Validators.required),
+      scholarship: new FormControl('', Validators.required)
     })
 
     this.phases = this.classificationService.phases;
@@ -81,7 +85,25 @@ export class ApplicationformComponent implements OnInit {
     this.trades = this.classificationService.trades;
     this.types = this.classificationService.types;
     this.academicYears = this.classificationService.academicYears;
+    this.scholarships = this.classificationService.scholarships;
 
+    this.certificates = this.classificationService.certificates;
+    console.log(this.certificates)
+    this.itemResource = new DataTableResource(this.certificates);
+
+  }
+
+  public loadCertificates(scholarshipType: any){
+    this.certificates = null;
+    console.log(this.certificates)
+    this.certificates = this.classificationService.getCertificates(scholarshipType);
+    console.log(this.certificates)
+    this.itemResource = new DataTableResource(this.certificates);
+
+  }
+
+  rowClick(rowEvent) {
+    console.log('Clicked: ' + rowEvent.row.item.id);
   }
 
 }

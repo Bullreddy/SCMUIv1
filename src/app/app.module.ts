@@ -1,9 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
-
 import { AppComponent } from './app.component';
 import { ApplicationformComponent } from './applicationform/applicationform.component';
+import { LoginformComponent } from './components/login/loginform.component';
 import { RouterModule } from '@angular/router';
 import { ClassificationService } from './classification.service'
 import { StudentService } from './service/studentservice.service'
@@ -21,7 +20,7 @@ import { Globals } from './components/globals';
 
 @NgModule({
   declarations: [
-    AppComponent,ApplicationformComponent, StudentlistComponent,NgbdDatepickerPopup
+    AppComponent,ApplicationformComponent, StudentlistComponent,NgbdDatepickerPopup,LoginformComponent
   ],
   imports: [
     BrowserModule,
@@ -35,6 +34,10 @@ import { Globals } from './components/globals';
       {
         path: 'studentlist',
         component: StudentlistComponent
+      },
+      {
+        path: 'login',
+        component: LoginformComponent
       }
     ])
   ],
