@@ -1,0 +1,27 @@
+<div class="box dashboard-content">
+  <!-- Left side column. contains the logo and sidebar -->
+  <aside class="main-sidebar">
+    <!-- sidebar: style can be found in sidebar.less -->
+    <section class="sidebar">
+      <!-- Sidebar user panel -->
+      <div class="sidebar-toggle-btn"> <a href="Javascript:;" class="sidebar-toggle" data-toggle="offcanvas" role="button"> <span class="sr-only">Toggle navigation</span> </a> </div>
+      <!-- sidebar menu: : style can be found in sidebar.less -->
+      <ul class="sidebar-menu">
+     
+        <li><a routerLink= '/dashboard'><i class="fa fa-bar-chart"></i><span>Dashboard</span></a></li>
+        <li><a routerLink= '/applicationform'><i class="fa fa-bar-chart"></i><span>Application Form</span></a></li>
+        <li><a routerLink= '/studentlist'><i class="fa fa-ship"></i><span>Student List</span></a></li>
+        <li><a routerLink= '/services'><i class="fa fa-clock-o"></i><span>Services</span></a></li>
+        <li><a routerLink= '/contact'><i class="fa fa-clock-o"></i><span>Contact</span></a></li>
+       
+      </ul>
+    </section>
+    <!-- /.sidebar -->
+  </aside>
+  <div class="dashboard-content-right">
+    <div id="content-ps-jd" class="col-md-6 col-xs-12"> </div>
+   <!--  <div class="box box-border clearfix"> -->
+        <router-outlet></router-outlet>
+    <!-- </div> -->
+  </div>
+</div>

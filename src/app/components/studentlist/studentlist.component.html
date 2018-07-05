@@ -1,0 +1,57 @@
+
+
+
+<div class="row">
+    <div class="col-md-12">
+
+    <!-- BEGIN SAMPLE FORM PORTLET-->
+    <div class="portlet light bordered">
+        <div class="portlet-title">
+            <div class="caption font-red-sunglo">
+                <i class="icon-settings font-red-sunglo"></i>
+                <span class="caption-subject bold uppercase">Students List</span>
+            </div>    
+        </div>
+        <div class="portlet-body">
+  <button type="submit" class="btn btn-primary" id="exportStudentsbtn" (click)="exportStudents()">Export</button>
+  <data-table 
+      [items]="items"
+      [itemCount]="itemCount"
+      [pageLimits]="limits"
+      [selectColumn]="true"
+      [pagination]="true"
+      [footerHeight]="50"
+      (reload)="reloadItems($event)"
+      (rowClick)="rowClick($event)"
+      (rowDoubleClick)="rowDoubleClick($event)"
+      [rowTooltip]="rowTooltip" >
+      <data-table-column
+          [property]="'name'"
+          [header]="'Name'"
+          [sortable]="true"
+          [resizable]="true">
+      </data-table-column>
+      <data-table-column
+          [property]="'fatherName'"
+          [header]="'Father Name'"
+          [sortable]="true">
+      </data-table-column>
+      <data-table-column
+          property="mobileNo"
+          header="Mobile number"
+          width="150px">
+      </data-table-column>
+      <data-table-column
+          [property]="'caste'"
+          [header]="'Caste'">
+          <ng-template #dataTableCell let-item="item">
+              <span *ngIf="item.casteID">{{item.caste.name}}</span>
+          </ng-template>
+      </data-table-column>
+    </data-table>
+        </div>
+        </div>
+        </div>
+        </div>
+
+

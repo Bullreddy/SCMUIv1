@@ -1,0 +1,10 @@
+.label {
+    color: #333;
+}
+.form-group{
+    min-height: 40px;
+}
+.text-danger{
+    max-height: 10px;
+    font-size: 12px;
+}
