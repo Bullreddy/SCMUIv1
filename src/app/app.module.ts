@@ -22,12 +22,13 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { StudentlistComponent } from './components/studentlist/studentlist.component';
 import {Interceptor} from './app.interceptor';
 import {AuthGuard} from './auth.gaurd';
-import {TokenStorage} from './token.storage'
+import {TokenStorage} from './token.storage';
+import { BranchComponent } from './components/branch/branch.component'
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,ApplicationformComponent,ServicesComponent,
-    ContactComponent, ApplayoutComponent, DashboardComponent, StudentlistComponent
+    ContactComponent, ApplayoutComponent, DashboardComponent, StudentlistComponent, BranchComponent
    
  ],
   imports: [HttpModule, BrowserModule, FormsModule,routing,BrowserAnimationsModule, NgbModule.forRoot(),HttpClientModule,

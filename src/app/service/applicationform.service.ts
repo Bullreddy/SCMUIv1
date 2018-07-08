@@ -6,6 +6,7 @@ import { HttpClient,HttpHeaders } from '@angular/common/http';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { ServiceApi } from '../constant/service.api.constant';
 import { map } from 'rxjs/operators/map';
+import { ToastrService } from 'ngx-toastr';
 
 @Injectable()
 export class ApplicationformService extends BehaviorSubject<any[]> {
@@ -20,7 +21,7 @@ export class ApplicationformService extends BehaviorSubject<any[]> {
   public academicYears: Array<{name: string, id: number}> = [];
   public types: Array<{name: string, id: number}> = [];
 
-  constructor(private http: HttpClient, private serviceApi: ServiceApi) {
+  constructor(private http: HttpClient, private serviceApi: ServiceApi,private toast: ToastrService) {
     super([])
   
     this.getClassifications();
@@ -69,6 +70,7 @@ export class ApplicationformService extends BehaviorSubject<any[]> {
     console.log(data)
     return this.http.post(this.serviceApi.urlMethod('createapplicationform'),data,this._options)
     .subscribe(res => {
+      this.toast.success('Application Saved Successfully.', 'Success');
       //this.classificationData = JSON.stringify(res);
     })
 }

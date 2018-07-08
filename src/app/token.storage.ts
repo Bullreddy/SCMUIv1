@@ -18,6 +18,11 @@ export class TokenStorage {
     window.localStorage.setItem(TOKEN_KEY,  token);
   }
 
+  public setItem(key: string,value: string) {
+    window.localStorage.removeItem(key);
+    window.localStorage.setItem(key,  value);
+  }
+
   public getToken(): string {
     return localStorage.getItem(TOKEN_KEY);
   }

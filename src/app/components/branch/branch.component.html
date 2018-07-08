@@ -1,0 +1,32 @@
+<div class="row">
+  <div class="col-md-12">
+        <!-- BEGIN SAMPLE FORM PORTLET-->
+        <div class="portlet light bordered">
+            <div class="portlet-title">
+                <div class="caption font-red-sunglo">
+                    <i class="icon-settings font-red-sunglo"></i>
+                    <span class="caption-subject bold uppercase"> Select Branch</span>
+                </div>
+            </div>
+         </div>   
+        <div class="portlet-body form">
+          <!--form class="form-horizontal" [formGroup]="branchForm" (ngSubmit)="selectBranch()" novalidate-->
+
+            <div class="form-group form-group-sm">
+                <!-- left column -->
+                <div class="col-sm-6">
+                        <div class="form-group">
+                                <label for="branchID" class="col-sm-4 control-label">Branch</label>
+                                <div class="col-sm-7">
+                                    <select [(ngModel)]="branchID" class="form-control" id="branchID" >
+                                        <option *ngFor="let branch of branches" value="{{branch.id}}">{{branch.name}}</option>
+                                    </select>
+                                </div>
+                        </div>
+                </div>
+            </div>
+          <!--/form-->
+          <button type="button" class="btn btn-primary" (click)="selectBranch()">Proceed</button>
+        </div>
+  </div>
+</div>

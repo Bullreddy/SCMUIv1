@@ -5,13 +5,14 @@ import { ServicesComponent } from './components/services/services.component';
 import { StudentlistComponent } from './components/studentlist/studentlist.component';
 import { ContactComponent } from './components/contact/contact.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { BranchComponent } from './components/branch/branch.component';
 import { ApplayoutComponent } from './components/applayout/applayout.component';
 import {AuthGuard} from './auth.gaurd';
 /**
  * All the routes for our application
  */
 const routes: Routes = [
-	{path: '', pathMatch: 'full', redirectTo: 'login'},
+		{path: '', pathMatch: 'full', redirectTo: 'login'},
 		{ 
 			path: '',
 			component: ApplayoutComponent, 
@@ -24,13 +25,9 @@ const routes: Routes = [
 				{ path: 'contact', component: ContactComponent,canActivate: [AuthGuard],data: {title: 'Contact'}}
 			]
 		},
-	
-	
+		{ path: 'branch', component: BranchComponent,canActivate: [AuthGuard],data: {title: 'Branch'}},
 		{ path: 'login', component: LoginComponent,canActivate: [AuthGuard]},
-	
-	
 		{ path: '**', redirectTo: 'login' }
-	
 		];
 
 export const appRoutingProviders: any[] = [
