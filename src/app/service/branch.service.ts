@@ -28,7 +28,7 @@ export class BranchService extends BehaviorSubject<any[]> {
   private getBranches() {
     const params ={
         "types": [
-            "CASTE"
+            "BRANCH"
         ]
       }
        this.http.post(this.serviceApi.urlMethod('getClasficationTypes'),

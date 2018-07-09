@@ -7,6 +7,7 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { ServiceApi } from '../constant/service.api.constant';
 import { map } from 'rxjs/operators/map';
 import { ToastrService } from 'ngx-toastr';
+import { TokenStorage} from '../token.storage';
 
 @Injectable()
 export class ApplicationformService extends BehaviorSubject<any[]> {
@@ -21,10 +22,11 @@ export class ApplicationformService extends BehaviorSubject<any[]> {
   public academicYears: Array<{name: string, id: number}> = [];
   public types: Array<{name: string, id: number}> = [];
 
-  constructor(private http: HttpClient, private serviceApi: ServiceApi,private toast: ToastrService) {
+  constructor(private http: HttpClient, private serviceApi: ServiceApi,private toast: ToastrService,private token: TokenStorage) {
     super([])
   
     this.getClassifications();
+    console.log(this.token.getItem("BranchID"))
   }
 
 
@@ -33,12 +35,14 @@ export class ApplicationformService extends BehaviorSubject<any[]> {
     ];
 
   private getClassifications() {
-
+      const branchID = this.token.getItem("BranchID");
       const params ={
         "types": [
             "CASTE","PHASE","TRADE","ACADEMIC_YEAR","TYPE"
-        ]
+        ],
+        "branchID":branchID
       }
+      console.log(params)
        this.http.post(this.serviceApi.urlMethod('getClasficationTypes'),
           JSON.stringify(params),this._options).subscribe(res => {
        //this.classificationData = JSON.stringify(res);

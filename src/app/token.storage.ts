@@ -23,6 +23,10 @@ export class TokenStorage {
     window.localStorage.setItem(key,  value);
   }
 
+  public getItem(key: string) {
+    return localStorage.getItem(key);
+  }
+
   public getToken(): string {
     return localStorage.getItem(TOKEN_KEY);
   }
