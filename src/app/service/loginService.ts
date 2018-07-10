@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable,EventEmitter ,Output} from '@angular/core';
 
 import { ResponseContentType,RequestOptions,Http,Response } from '@angular/http';
 import { saveAs } from 'file-saver/FileSaver';
@@ -14,13 +14,16 @@ import { catchError } from 'rxjs/operators';
 export class LoginService extends BehaviorSubject<any[]> {
 
   
-
+ 
   constructor(private http:HttpClient,private serviceApi:ServiceApi) { 
 super([])
+
+
   }
   attemptAuth(ussername: string, password: string): Observable<any> {
     const credentials = {username: ussername, password: password};
     console.log('attempAuth ::');
+    
     return this.http.post(this.serviceApi.urlMethod('login'), credentials);
   }
 

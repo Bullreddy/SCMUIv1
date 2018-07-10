@@ -12,14 +12,14 @@
             </div>
             <div class="portlet-body form">
                        <form class="form-horizontal" [formGroup]="admissionForm" (ngSubmit)="saveAdmission()" novalidate>
-
+<input type="hidden" formControlName ="id" id="id" />
         <div class="form-group form-group-sm">
             <!-- left column -->
             <div class="col-sm-6">
                 <div class="form-group">
                     <label for="admissionNo" class="col-sm-4 control-label">Admission No</label>
                     <div class="col-sm-7">
-                        <input type="text" class="form-control" formControlName ="admissionNo" id="admissionNo" placeholder="">
+                        <input type="text" class="form-control" formControlName ="admissionNo" (blur)="focusOutFunction()" id="admissionNo" placeholder="">
                         <div *ngIf="admissionForm.controls['admissionNo'].invalid && (admissionForm.controls['admissionNo'].dirty || admissionForm.controls['admissionNo'].touched)" class="text-danger">
                                 <div *ngIf="admissionForm.controls['admissionNo'].errors.required">
                                     Admission No is required.
@@ -96,10 +96,10 @@
                 <div class="form-group">
                     <label for="address" class="col-sm-4 control-label">Address</label>
                     <div class="col-sm-7">
-                        <input type="text" class="form-control" formControlName ="address" id="address" placeholder="">
+                        <input type="text" class="form-control" formControlName ="presentAddress" id="address" placeholder="">
                     
-                    <div *ngIf="admissionForm.controls['address'].invalid && (admissionForm.controls['address'].dirty || admissionForm.controls['address'].touched)" class="text-danger">
-                        <div *ngIf="admissionForm.controls['address'].errors.required">
+                    <div *ngIf="admissionForm.controls['presentAddress'].invalid && (admissionForm.controls['presentAddress'].dirty || admissionForm.controls['presentAddress'].touched)" class="text-danger">
+                        <div *ngIf="admissionForm.controls['presentAddress'].errors.required">
                             address is required.
                         </div>    
                     </div>
@@ -150,13 +150,13 @@
                     </div>
                     </div>
                     <div class="form-group">
-                        <label for="mailID" class="col-sm-4 control-label">Mail ID</label>
+                        <label for="email" class="col-sm-4 control-label">Mail ID</label>
                         <div class="col-sm-7">
-                            <input type="text" class="form-control" formControlName ="mailID" id="mailID" placeholder="">
+                            <input type="text" class="form-control" formControlName ="email" id="email" placeholder="">
                        
-                        <div *ngIf="admissionForm.controls['mailID'].invalid && (admissionForm.controls['mailID'].dirty || admissionForm.controls['mailID'].touched)" class="text-danger">
-                            <div *ngIf="admissionForm.controls['mailID'].errors.required">
-                                mailID is required.
+                        <div *ngIf="admissionForm.controls['email'].invalid && (admissionForm.controls['email'].dirty || admissionForm.controls['email'].touched)" class="text-danger">
+                            <div *ngIf="admissionForm.controls['email'].errors.required">
+                                MailId  is required.
                             </div>    
                         </div>
                     </div>
@@ -224,9 +224,9 @@
 
       <!-- Modal Footer -->
             <div class="form-group text-right">
-                    <button type="submit" class="btn btn-primary mar_r10" id="newConsigneeSubmit">Create Record</button>
+                    <button type="submit" class="btn btn-primary mar_r10" id="newConsigneeSubmit" [innerHTML]="btnState"></button>
            
-                <button type="reset" class="btn btn-default mar_r10" id="newConsigneeReset">Reset</button>
+                <button type="button" (click)="resetForm()" class="btn btn-default mar_r10" id="newConsigneeReset">Reset</button>
              </div><!-- End Modal Footer -->
         
 

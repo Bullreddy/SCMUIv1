@@ -1,4 +1,4 @@
-import { Component, OnInit,OnDestroy } from '@angular/core';
+import { Component, OnInit,OnDestroy ,HostBinding,Input} from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { LoginService } from '../../service/loginService';
 import {TokenStorage} from '../../token.storage';
@@ -12,8 +12,12 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class LoginComponent implements OnInit {
    model: any={};
+  
+ 
+  
+  
   constructor(private router: Router,private authService:LoginService,private token:TokenStorage,private toast: ToastrService) { 
-
+   
    
   }
 

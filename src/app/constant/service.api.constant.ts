@@ -9,6 +9,7 @@ export class ServiceApi {
 	private urlapi = {
 	'createapplicationform':'student/saveStudent',
 		'getClasficationTypes':'services/rest/classifications/getClassifications',
+		'getapplicationform':'student/getStudentForm',
 		'getAllStudents':'student/getStudents',
 		'downloadStudent':'student/exportStudents',
 		'login':'token/generate-token',
