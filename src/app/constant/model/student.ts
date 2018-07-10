@@ -5,6 +5,7 @@ export class Student{
     fatherName : string;
     motherName : string;
     mobileNo : string;
+    certificateIds : any[];
 
     constructor(values: Object[]){
         Object.assign(this,values);

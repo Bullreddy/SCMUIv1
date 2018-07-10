@@ -15,12 +15,14 @@ export class ApplicationformService extends BehaviorSubject<any[]> {
 
   private _options = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
  
+  certificates : any;
   public classificationData: string;
   public trades: Array<{name: string, id: number}> = []; 
   public castes: Array<{name: string, id: number}> = [];
   public phases: Array<{name: string, id: number}> = [];
   public academicYears: Array<{name: string, id: number}> = [];
   public types: Array<{name: string, id: number}> = [];
+  public scholarships: Array<{name: string, id: number}> = [];
 
   constructor(private http: HttpClient, private serviceApi: ServiceApi,private toast: ToastrService,private token: TokenStorage) {
     super([])
@@ -38,17 +40,44 @@ export class ApplicationformService extends BehaviorSubject<any[]> {
       const branchID = this.token.getItem("BranchID");
       const params ={
         "types": [
-            "CASTE","PHASE","TRADE","ACADEMIC_YEAR","TYPE"
+            "CASTE","PHASE","TRADE","ACADEMIC_YEAR","TYPE","SCHOLARSHIP"
         ],
         "branchID":branchID
       }
-      console.log(params)
        this.http.post(this.serviceApi.urlMethod('getClasficationTypes'),
           JSON.stringify(params),this._options).subscribe(res => {
        //this.classificationData = JSON.stringify(res);
        this.prepareUIDropdownData(res);
     });
     return this.classificationData;
+  }
+
+  getCertificates(scholarshipType : any){
+
+    this.certificates = [];
+    if( scholarshipType === "null" || scholarshipType === null){
+        scholarshipType = "11"
+    }
+
+    const params ={
+        "scholarshipType": scholarshipType,
+        "types": [
+         "SCHOLARSHIP"
+      ],
+    }
+    this.http.post(this.serviceApi.urlMethod('getCertificates'),
+          JSON.stringify(params),this._options).subscribe(res => {
+           this.prepareCertificatesData(res);
+           console.log(this.certificates)
+    });
+    return this.certificates;
+  }  
+
+
+  prepareCertificatesData(res){
+    res.classifications.forEach(data =>{
+      this.certificates.push({ name:data.name, id:data.id})
+    })
   }
 
   private prepareUIDropdownData(res){
@@ -64,6 +93,8 @@ export class ApplicationformService extends BehaviorSubject<any[]> {
           this.academicYears.push({ name: data.name, id: data.id })
         else if(type === "TYPE")
           this.types.push({ name: data.name, id: data.id })
+        else if(type ==="SCHOLARSHIP")
+          this.scholarships.push({ name: data.name, id: data.id })
     })    
   }
 

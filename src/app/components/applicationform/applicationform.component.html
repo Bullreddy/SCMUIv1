@@ -94,16 +94,10 @@
                 </div>
                 </div>
                 <div class="form-group">
-                    <label for="address" class="col-sm-4 control-label">Address</label>
+                    <label for="category" class="col-sm-4 control-label">Category</label>
                     <div class="col-sm-7">
-                        <input type="text" class="form-control" formControlName ="address" id="address" placeholder="">
-                    
-                    <div *ngIf="admissionForm.controls['address'].invalid && (admissionForm.controls['address'].dirty || admissionForm.controls['address'].touched)" class="text-danger">
-                        <div *ngIf="admissionForm.controls['address'].errors.required">
-                            address is required.
-                        </div>    
+                        <input type="text" class="form-control" formControlName ="category" id="category" placeholder="">
                     </div>
-                </div>
                 </div>
                 <div class="form-group">
                         <label for="type" class="col-sm-4 control-label">Type</label>
@@ -141,13 +135,7 @@
                         <label for="regNo" class="col-sm-4 control-label">Registration No</label>
                         <div class="col-sm-7">
                             <input type="text" class="form-control" formControlName ="regNo" id="regNo" placeholder="">
-                        
-                        <div *ngIf="admissionForm.controls['regNo'].invalid && (admissionForm.controls['regNo'].dirty || admissionForm.controls['regNo'].touched)" class="text-danger">
-                            <div *ngIf="admissionForm.controls['regNo'].errors.required">
-                                regNo is required.
-                            </div>    
                         </div>
-                    </div>
                     </div>
                     <div class="form-group">
                         <label for="mailID" class="col-sm-4 control-label">Mail ID</label>
@@ -198,17 +186,18 @@
                     </div>
                     </div>
                     <div class="form-group">
-                        <label for="category" class="col-sm-4 control-label">Category</label>
+                        <label for="address" class="col-sm-4 control-label">Address</label>
                         <div class="col-sm-7">
-                            <input type="text" class="form-control" formControlName ="category" id="category" placeholder="">
-                       
-                        <div *ngIf="admissionForm.controls['category'].invalid && (admissionForm.controls['category'].dirty || admissionForm.controls['category'].touched)" class="text-danger">
-                            <div *ngIf="admissionForm.controls['category'].errors.required">
-                                category is required.
+                            <input type="text" class="form-control" formControlName ="address" id="address" placeholder="">
+                        
+                        <div *ngIf="admissionForm.controls['address'].invalid && (admissionForm.controls['address'].dirty || admissionForm.controls['address'].touched)" class="text-danger">
+                            <div *ngIf="admissionForm.controls['address'].errors.required">
+                                address is required.
                             </div>    
                         </div>
+                         </div>
                     </div>
-                    </div>
+
                     <div class="form-group">
                             <label for="academicYearID" class="col-sm-4 control-label">Academic Year</label>
                             <div class="col-sm-7">
@@ -217,10 +206,42 @@
                                 </select>
                             </div>
                     </div>
+                    <div class="form-group">
+                        <label for="scholarship" class="col-sm-4 control-label">Scholarship</label>
+                        <div class="col-sm-7">
+                            <select class="form-control" formControlName ="scholarship" id="scholarship" (change)="loadCertificates($event.target.value)">
+                                <option *ngFor="let scholarship of scholarships" value="{{scholarship.id}}">{{scholarship.name}}</option>
+                            </select>
+                        </div>
+                    </div>
             </div>
         </div>
 
+        <div>
+           
+            <data-table
+                [header]="true"
+                [title]="'Certificates'"
+                [items]="certificates"
+                [selectColumn]="true"
+                (rowClick)="rowClick($event)"
+                [pagination]="false">
+                <data-table-column
+                    [property]="'name'"
+                    [header]="'Certificate Name'">
+                </data-table-column>
+              </data-table>
+          </div>
 
+          <div>
+            <div>
+                <b>Selected:</b>
+                <span [textContent]="certificatesTable.selectedRows.length"></span>
+            </div>
+            <div *ngFor="let selected of certificatesTable.selectedRows">
+                <span [textContent]="selected.item.id"></span>
+            </div>
+          </div>
 
       <!-- Modal Footer -->
             <div class="form-group text-right">
