@@ -34,7 +34,7 @@ export class ApplicationformComponent implements OnInit {
     console.log(this.student)
     this.showValidationErrors();
     this.certificatesTable.selectedRows.forEach(data =>{
-      this.selectedCertificates.push({id : data.item.id}) 
+      this.selectedCertificates.push(data.item.id) 
     })
     console.log(this.selectedCertificates)
     this.classificationService.saveAdmission(this.student);
