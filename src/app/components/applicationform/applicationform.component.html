@@ -12,15 +12,16 @@
             </div>
             <div class="portlet-body form">
                        <form class="form-horizontal" [formGroup]="admissionForm" (ngSubmit)="saveAdmission()" novalidate>
-
+<input type="hidden" formControlName ="id" id="id" />
         <div class="form-group form-group-sm">
             <!-- left column -->
             <div class="col-sm-6">
                 <div class="form-group">
                     <label for="admissionNo" class="col-sm-4 control-label">Admission No</label>
                     <div class="col-sm-7">
-                        <input type="text" class="form-control" formControlName ="admissionNo" id="admissionNo" placeholder="">
-                        <div *ngIf="admissionForm.controls['admissionNo'].invalid && (admissionForm.controls['admissionNo'].dirty || admissionForm.controls['admissionNo'].touched)" class="text-danger">
+                        <input type="text" class="form-control" formControlName ="admissionNo" (blur)="focusOutFunction()" id="admissionNo" placeholder="">
+                        <div *ngIf="admissionForm.controls['admissionNo'].invalid && (admissionForm.controls['admissionNo'].dirty || 
+admissionForm.controls['admissionNo'].touched)" class="text-danger">
                                 <div *ngIf="admissionForm.controls['admissionNo'].errors.required">
                                     Admission No is required.
                                 </div>   
@@ -32,7 +33,8 @@
                     <label for="name" class="col-sm-4 control-label">Name</label>
                     <div class="col-sm-7">
                         <input type="text" class="form-control" formControlName ="name" id="name" placeholder="" required>
-                        <div *ngIf="admissionForm.controls['name'].invalid && (admissionForm.controls['name'].dirty || admissionForm.controls['name'].touched)" class="text-danger">
+                        <div *ngIf="admissionForm.controls['name'].invalid && (admissionForm.controls['name'].dirty || 
+admissionForm.controls['name'].touched)" class="text-danger">
                             <div *ngIf="admissionForm.controls['name'].errors.required">
                                 Name is required.
                             </div>
@@ -45,7 +47,8 @@
                     <div class="col-sm-7">
                         <input type="text" class="form-control" formControlName ="fatherName" id="fatherName" placeholder="">
                     
-                    <div *ngIf="admissionForm.controls['fatherName'].invalid && (admissionForm.controls['fatherName'].dirty || admissionForm.controls['fatherName'].touched)" class="text-danger">
+                    <div *ngIf="admissionForm.controls['fatherName'].invalid && (admissionForm.controls['fatherName'].dirty || 
+admissionForm.controls['fatherName'].touched)" class="text-danger">
                         <div *ngIf="admissionForm.controls['fatherName'].errors.required">
                             fatherName is required.
                         </div>
@@ -57,7 +60,8 @@
                     <div class="col-sm-7">
                         <input type="text" class="form-control" formControlName ="mobileNo" id="mobileNo" placeholder="">
                   
-                    <div *ngIf="admissionForm.controls['mobileNo'].invalid && (admissionForm.controls['mobileNo'].dirty || admissionForm.controls['mobileNo'].touched)" class="text-danger">
+                    <div *ngIf="admissionForm.controls['mobileNo'].invalid && (admissionForm.controls['mobileNo'].dirty || 
+admissionForm.controls['mobileNo'].touched)" class="text-danger">
                         <div *ngIf="admissionForm.controls['mobileNo'].errors.required">
                             mobileNo is required.
                         </div>    
@@ -72,7 +76,8 @@
                             <option *ngFor="let trade of trades" value="{{trade.id}}">{{trade.name}}</option>
                         </select>
                     
-                    <div *ngIf="admissionForm.controls['tradeID'].invalid && (admissionForm.controls['tradeID'].dirty || admissionForm.controls['tradeID'].touched)" class="text-danger">
+                    <div *ngIf="admissionForm.controls['tradeID'].invalid && (admissionForm.controls['tradeID'].dirty || 
+admissionForm.controls['tradeID'].touched)" class="text-danger">
                         <div *ngIf="admissionForm.controls['tradeID'].errors.required">
                             tradeID is required.
                         </div>    
@@ -86,7 +91,8 @@
                             <option *ngFor="let caste of castes" value="{{caste.id}}">{{caste.name}}</option>
                         </select>
                     
-                    <div *ngIf="admissionForm.controls['casteID'].invalid && (admissionForm.controls['casteID'].dirty || admissionForm.controls['casteID'].touched)" class="text-danger">
+                    <div *ngIf="admissionForm.controls['casteID'].invalid && (admissionForm.controls['casteID'].dirty || 
+admissionForm.controls['casteID'].touched)" class="text-danger">
                         <div *ngIf="admissionForm.controls['casteID'].errors.required">
                             casteID is required.
                         </div>    
@@ -97,6 +103,13 @@
                     <label for="category" class="col-sm-4 control-label">Category</label>
                     <div class="col-sm-7">
                         <input type="text" class="form-control" formControlName ="category" id="category" placeholder="">
+                        <input type="text" class="form-control" formControlName ="presentAddress" id="address" placeholder="">
+                    
+                    <div *ngIf="admissionForm.controls['presentAddress'].invalid && (admissionForm.controls['presentAddress'].dirty || 
+admissionForm.controls['presentAddress'].touched)" class="text-danger">
+                        <div *ngIf="admissionForm.controls['presentAddress'].errors.required">
+                            address is required.
+                        </div>    
                     </div>
                 </div>
                 <div class="form-group">
@@ -106,7 +119,8 @@
                                 <option *ngFor="let type of types" value="{{type.id}}">{{type.name}}</option>
                             </select>
                        
-                        <div *ngIf="admissionForm.controls['typeID'].invalid && (admissionForm.controls['typeID'].dirty || admissionForm.controls['typeID'].touched)" class="text-danger">
+                        <div *ngIf="admissionForm.controls['typeID'].invalid && (admissionForm.controls['typeID'].dirty || 
+admissionForm.controls['typeID'].touched)" class="text-danger">
                             <div *ngIf="admissionForm.controls['typeID'].errors.required">
                                 typeID is required.
                             </div>    
@@ -120,7 +134,8 @@
                             <option *ngFor="let phase of phases" value="{{phase.id}}">{{phase.name}}</option>
                         </select>
                    
-                    <div *ngIf="admissionForm.controls['phaseID'].invalid && (admissionForm.controls['phaseID'].dirty || admissionForm.controls['phaseID'].touched)" class="text-danger">
+                    <div *ngIf="admissionForm.controls['phaseID'].invalid && (admissionForm.controls['phaseID'].dirty || 
+admissionForm.controls['phaseID'].touched)" class="text-danger">
                         <div *ngIf="admissionForm.controls['phaseID'].errors.required">
                             phaseID is required.
                         </div>    
@@ -138,13 +153,14 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="mailID" class="col-sm-4 control-label">Mail ID</label>
+                        <label for="email" class="col-sm-4 control-label">Mail ID</label>
                         <div class="col-sm-7">
-                            <input type="text" class="form-control" formControlName ="mailID" id="mailID" placeholder="">
+                            <input type="text" class="form-control" formControlName ="email" id="email" placeholder="">
                        
-                        <div *ngIf="admissionForm.controls['mailID'].invalid && (admissionForm.controls['mailID'].dirty || admissionForm.controls['mailID'].touched)" class="text-danger">
-                            <div *ngIf="admissionForm.controls['mailID'].errors.required">
-                                mailID is required.
+                        <div *ngIf="admissionForm.controls['email'].invalid && (admissionForm.controls['email'].dirty || 
+admissionForm.controls['email'].touched)" class="text-danger">
+                            <div *ngIf="admissionForm.controls['email'].errors.required">
+                                MailId  is required.
                             </div>    
                         </div>
                     </div>
@@ -166,7 +182,8 @@
                         <div class="col-sm-7">
                             <input type="text" class="form-control" formControlName ="aadharNo" id="aadharNo" placeholder="">
                         
-                        <div *ngIf="admissionForm.controls['aadharNo'].invalid && (admissionForm.controls['aadharNo'].dirty || admissionForm.controls['aadharNo'].touched)" class="text-danger">
+                        <div *ngIf="admissionForm.controls['aadharNo'].invalid && (admissionForm.controls['aadharNo'].dirty || 
+admissionForm.controls['aadharNo'].touched)" class="text-danger">
                             <div *ngIf="admissionForm.controls['aadharNo'].errors.required">
                                 aadharNo is required.
                             </div>    
@@ -178,7 +195,8 @@
                         <div class="col-sm-7">
                             <input type="date" class="form-control" formControlName ="dob" id="dob" placeholder="">
                         
-                        <div *ngIf="admissionForm.controls['dob'].invalid && (admissionForm.controls['dob'].dirty || admissionForm.controls['dob'].touched)" class="text-danger">
+                        <div *ngIf="admissionForm.controls['dob'].invalid && (admissionForm.controls['dob'].dirty || admissionForm.controls['dob'].touched)" 
+class="text-danger">
                             <div *ngIf="admissionForm.controls['dob'].errors.required">
                                 dob is required.
                             </div>    
@@ -190,7 +208,8 @@
                         <div class="col-sm-7">
                             <input type="text" class="form-control" formControlName ="address" id="address" placeholder="">
                         
-                        <div *ngIf="admissionForm.controls['address'].invalid && (admissionForm.controls['address'].dirty || admissionForm.controls['address'].touched)" class="text-danger">
+                        <div *ngIf="admissionForm.controls['address'].invalid && (admissionForm.controls['address'].dirty || 
+admissionForm.controls['address'].touched)" class="text-danger">
                             <div *ngIf="admissionForm.controls['address'].errors.required">
                                 address is required.
                             </div>    
@@ -245,14 +264,14 @@
 
       <!-- Modal Footer -->
             <div class="form-group text-right">
-                    <button type="submit" class="btn btn-primary mar_r10" id="newConsigneeSubmit">Create Record</button>
+                    <button type="submit" class="btn btn-primary mar_r10" id="newConsigneeSubmit" [innerHTML]="btnState"></button>
            
-                <button type="reset" class="btn btn-default mar_r10" id="newConsigneeReset">Reset</button>
+                <button type="button" (click)="resetForm()" class="btn btn-default mar_r10" id="newConsigneeReset">Reset</button>
              </div><!-- End Modal Footer -->
         
 
     </form>
-            </div>
+            
         </div>
         
      

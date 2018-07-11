@@ -2,7 +2,7 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers, Response, URLSearchParams, RequestOptions, RequestOptionsArgs } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
-import { HttpClient,HttpHeaders } from '@angular/common/http';
+import { HttpClient,HttpHeaders,HttpParams} from '@angular/common/http';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { ServiceApi } from '../constant/service.api.constant';
 import { map } from 'rxjs/operators/map';
@@ -99,7 +99,13 @@ export class ApplicationformService extends BehaviorSubject<any[]> {
   }
 
 
-  
+  public getFormByNumber (data:any){
+    let params = new HttpParams();
+    params = params.append('admissionNo',data.number);
+    return this.http.put(this.serviceApi.urlMethod('getapplicationform'),data,this._options)
+    
+    
+  }
   public saveAdmission (data:any){
     console.log(this.serviceApi.urlMethod('createapplicationform'))
     console.log(data)
@@ -108,6 +114,7 @@ export class ApplicationformService extends BehaviorSubject<any[]> {
       this.toast.success('Application Saved Successfully.', 'Success');
       //this.classificationData = JSON.stringify(res);
     })
+
 }
 private getHeader() {
   let headers = new Headers();
