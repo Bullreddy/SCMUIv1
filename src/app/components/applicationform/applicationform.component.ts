@@ -58,10 +58,15 @@ if(res!=null){
     admissionNo:val
   });
 }
+
+
+this.loadCertificates(this.admissionForm.value.scholarship)
+
    })
   }
  }
   public saveAdmission() {
+    console.log('saveamission')
 
     this.student = this.admissionForm.value;
     this.student.certificateIds = this.selectedCertificates;
@@ -71,20 +76,20 @@ if(res!=null){
       this.selectedCertificates.push(data.item.id) 
     })
 
+    console.log(this.admissionForm.valid)
+
     if(this.admissionForm.valid) {
         this.student = this.admissionForm.value;
         this.student.certificateIds = this.selectedCertificates;
         this.classificationService.saveAdmission(this.student);
 
-        console.log(this.student);
-      this.classificationService.saveAdmission(this.student).add(res => {
+        this.classificationService.saveAdmission(this.student).add(res => {
 
-        console.log(res);
+
         this.admissionForm.patchValue(res)
- 
-        console.log(this.admissionForm.value)
+
         this.toast.success('Application Form saved Successfully.', 'Success');
-  this.btnState="Update";
+        this.btnState="Update";
        // this.admissionForm.value=res;
          //this.classificationData = JSON.stringify(res);
        })
@@ -109,7 +114,6 @@ if(res!=null){
     this.admissionForm.controls['phaseID'].markAsTouched()
     this.admissionForm.controls['presentAddress'].markAsTouched()
     this.admissionForm.controls['typeID'].markAsTouched()
-    this.admissionForm.controls['regNo'].markAsTouched()
     this.admissionForm.controls['email'].markAsTouched()
     this.admissionForm.controls['motherName'].markAsTouched()
     this.admissionForm.controls['alternateMobileNo'].markAsTouched()
@@ -129,7 +133,6 @@ if(res!=null){
       casteID: new FormControl('', Validators.required),
       phaseID: new FormControl('', Validators.required),
       presentAddress: new FormControl('', Validators.required),
-      address: new FormControl('', Validators.required),
       typeID: new FormControl('', Validators.required),
       regNo: new FormControl(),
       mailID: new FormControl(),
@@ -153,12 +156,12 @@ if(res!=null){
 
   }
 
+
   public loadCertificates(scholarshipType: any){
     this.certificates = null;
-    console.log(this.certificates)
     this.certificates = this.classificationService.getCertificates(scholarshipType);
-    console.log(this.certificates)
-    this.itemResource = new DataTableResource(this.certificates);
+  
+    //this.itemResource = new DataTableResource(this.certificates);
   }
 
   rowClick(rowEvent) {

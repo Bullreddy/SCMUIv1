@@ -197,13 +197,13 @@ class="text-danger">
                     </div>
                     </div>
                     <div class="form-group">
-                        <label for="address" class="col-sm-4 control-label">Address</label>
+                        <label for="presentAddress" class="col-sm-4 control-label">Address</label>
                         <div class="col-sm-7">
-                            <input type="text" class="form-control" formControlName ="address" id="address" placeholder="">
+                            <input type="text" class="form-control" formControlName ="presentAddress" id="presentAddress" placeholder="">
                         
-                        <div *ngIf="admissionForm.controls['address'].invalid && (admissionForm.controls['address'].dirty || 
-admissionForm.controls['address'].touched)" class="text-danger">
-                            <div *ngIf="admissionForm.controls['address'].errors.required">
+                        <div *ngIf="admissionForm.controls['presentAddress'].invalid && (admissionForm.controls['presentAddress'].dirty || 
+admissionForm.controls['presentAddress'].touched)" class="text-danger">
+                            <div *ngIf="admissionForm.controls['presentAddress'].errors.required">
                                 address is required.
                             </div>    
                         </div>
@@ -227,7 +227,6 @@ admissionForm.controls['address'].touched)" class="text-danger">
                         </div>
                     </div>
             </div>
-
 
         <div>
            
