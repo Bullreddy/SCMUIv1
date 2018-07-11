@@ -1,8 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component,ViewChild , OnInit } from '@angular/core';
 import { Validators, FormGroup, FormControl, FormBuilder ,FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {ApplicationformService} from '../../service/applicationform.service';
 import { Student } from '../../constant/model/Student';
+
 import { ToastrService } from 'ngx-toastr';
+
+import { DataTable,DataTableResource } from 'angular5-data-table';
+
 @Component({
   selector: 'app-applicationform',
   templateUrl: './applicationform.component.html',
@@ -12,18 +16,27 @@ import { ToastrService } from 'ngx-toastr';
 export class ApplicationformComponent implements OnInit {
   
   public admissionForm: FormGroup;
+
+  certificates : any;
+  itemResource;
+
   public company:string[];
   public phases: Array<{name: string, id: number}> = [];
   public castes: Array<{name: string, id: number}> = [];
   public trades: Array<{name: string, id: number}> = [];
   public types: Array<{name: string, id: number}> = [];
   public academicYears: Array<{name: string, id: number}> = [];
+  public scholarships: Array<{name: string, id: number}> = [];
+  public selectedCertificates = [];
   public classificationData:string;
   public  btnState:string ="create";
   public student:Student;
-  constructor(private classificationService:ApplicationformService,fb:FormBuilder,private toast:ToastrService) { 
 
+  constructor(private classificationService:ApplicationformService,fb:FormBuilder,private toast:ToastrService) { 
   }
+
+  @ViewChild(DataTable) certificatesTable: DataTable;
+  
  public focusOutFunction(){
    let val=this.admissionForm.controls.admissionNo.value;
    
@@ -51,9 +64,21 @@ if(res!=null){
   public saveAdmission() {
 
     console.log(this.admissionForm)
+
+    this.student = this.admissionForm.value;
+    this.student.certificateIds = this.selectedCertificates;
+    console.log(this.student)
+
     this.showValidationErrors();
-    if(this.admissionForm.valid) {
+    this.certificatesTable.selectedRows.forEach(data =>{
+      this.selectedCertificates.push(data.item.id) 
+    })
+    console.log(this.selectedCertificates)
+   // this.classificationService.saveAdmission(this.student);
+
+  if(this.admissionForm.valid) {
         this.student = this.admissionForm.value;
+
         console.log(this.student);
       this.classificationService.saveAdmission(this.student).subscribe(res => {
 
@@ -67,6 +92,9 @@ if(res!=null){
          //this.classificationData = JSON.stringify(res);
        })
       
+
+        //this.student.certificateIds = this.selectedCertificates;
+        //this.classificationService.saveAdmission(this.student);
 
     }
   }
@@ -108,15 +136,21 @@ if(res!=null){
       phaseID: new FormControl('', Validators.required),
       presentAddress: new FormControl('', Validators.required),
       typeID: new FormControl('', Validators.required),
+
       regNo: new FormControl('', Validators.required),
       email: new FormControl(),
+
       motherName: new FormControl(),
       alternateMobileNo: new FormControl(),
       aadharNo: new FormControl(),
       id:new FormControl(),
       dob: new FormControl('', Validators.required),
       category: new FormControl(),
-      academicYearID: new FormControl('', Validators.required)
+
+      academicYearID: new FormControl('', Validators.required),
+
+     scholarship: new FormControl('', Validators.required)
+      
     })
 
     this.phases = this.classificationService.phases;
@@ -124,7 +158,20 @@ if(res!=null){
     this.trades = this.classificationService.trades;
     this.types = this.classificationService.types;
     this.academicYears = this.classificationService.academicYears;
+    this.scholarships = this.classificationService.scholarships;
 
+  }
+
+  public loadCertificates(scholarshipType: any){
+    this.certificates = null;
+    console.log(this.certificates)
+    this.certificates = this.classificationService.getCertificates(scholarshipType);
+    console.log(this.certificates)
+    this.itemResource = new DataTableResource(this.certificates);
+  }
+
+  rowClick(rowEvent) {
+    console.log('Clicked: ' + rowEvent.row.item.id);
   }
 
 }

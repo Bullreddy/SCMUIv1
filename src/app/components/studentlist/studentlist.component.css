@@ -4,3 +4,11 @@
     border-top: 1px solid #ddd!important;
     border-bottom: 1px solid #ddd!important;
 }
+.width200{
+    width:200px;
+}
+
+.inlineblock{
+    display: inline-block;
+    margin-right:10px;
+}

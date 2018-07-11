@@ -42,7 +42,7 @@ public submitForm(){
       }else{
         this.token.saveToken(data.token);
         this.toast.success('Login Successfully.', 'Success');
-       this.router.navigate(['dashboard']) 
+       this.router.navigate(['branch']) 
       }
      // 
       console.log(data);

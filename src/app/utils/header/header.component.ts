@@ -32,7 +32,7 @@ export class HeaderComponent implements OnInit {
   }
 
   title: string;
-  private logout():void {
+  public logout():void {
   this.token.signOut();
   this.toastr.success('Logout Successfully.', 'Success');
     
