@@ -77,11 +77,11 @@ if(res!=null){
         this.classificationService.saveAdmission(this.student);
 
         console.log(this.student);
-      this.classificationService.saveAdmission(this.student).subscribe(res => {
+      this.classificationService.saveAdmission(this.student).add(res => {
 
         console.log(res);
         this.admissionForm.patchValue(res)
-
+ 
         console.log(this.admissionForm.value)
         this.toast.success('Application Form saved Successfully.', 'Success');
   this.btnState="Update";
@@ -129,6 +129,7 @@ if(res!=null){
       casteID: new FormControl('', Validators.required),
       phaseID: new FormControl('', Validators.required),
       presentAddress: new FormControl('', Validators.required),
+      address: new FormControl('', Validators.required),
       typeID: new FormControl('', Validators.required),
       regNo: new FormControl(),
       mailID: new FormControl(),

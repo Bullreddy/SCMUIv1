@@ -1,33 +1,33 @@
+
 <div class="row">
-        <div class="col-md-12">
 <div class="col-md-12 ">
         <!-- BEGIN SAMPLE FORM PORTLET-->
-        <div class="portlet light bordered">
-            <div class="portlet-title">
-                <div class="caption font-red-sunglo">
+    <div class="portlet light bordered">
+        <div class="portlet-title">
+            <div class="caption font-red-sunglo">
                     <i class="icon-settings font-red-sunglo"></i>
                     <span class="caption-subject bold uppercase"> Application Form</span>
-                </div>
-                
             </div>
-            <div class="portlet-body form">
-                       <form class="form-horizontal" [formGroup]="admissionForm" (ngSubmit)="saveAdmission()" novalidate>
-<input type="hidden" formControlName ="id" id="id" />
-        <div class="form-group form-group-sm">
+                
+        </div>
+        <div class="portlet-body form">
+            <form class="form-horizontal" [formGroup]="admissionForm" (ngSubmit)="saveAdmission()" novalidate>
+                <input type="hidden" formControlName ="id" id="id" />
+                <div class="form-group form-group-sm">
             <!-- left column -->
             <div class="col-sm-6">
                 <div class="form-group">
-                    <label for="admissionNo" class="col-sm-4 control-label">Admission No</label>
-                    <div class="col-sm-7">
-                        <input type="text" class="form-control" formControlName ="admissionNo" (blur)="focusOutFunction()" id="admissionNo" placeholder="">
-                        <div *ngIf="admissionForm.controls['admissionNo'].invalid && (admissionForm.controls['admissionNo'].dirty || 
-admissionForm.controls['admissionNo'].touched)" class="text-danger">
-                                <div *ngIf="admissionForm.controls['admissionNo'].errors.required">
-                                    Admission No is required.
-                                </div>   
+                            <label for="admissionNo" class="col-sm-4 control-label">Admission No</label>
+                            <div class="col-sm-7">
+                                <input type="text" class="form-control" formControlName ="admissionNo" (blur)="focusOutFunction()" id="admissionNo" placeholder="">
+                                <div *ngIf="admissionForm.controls['admissionNo'].invalid && (admissionForm.controls['admissionNo'].dirty || 
+        admissionForm.controls['admissionNo'].touched)" class="text-danger">
+                                        <div *ngIf="admissionForm.controls['admissionNo'].errors.required">
+                                            Admission No is required.
+                                        </div>   
+                                    </div>
                             </div>
-                    </div>
-                    
+                            
                 </div>
                 <div class="form-group">
                     <label for="name" class="col-sm-4 control-label">Name</label>
@@ -38,7 +38,7 @@ admissionForm.controls['name'].touched)" class="text-danger">
                             <div *ngIf="admissionForm.controls['name'].errors.required">
                                 Name is required.
                             </div>
-                            </div>
+                        </div>
                     </div>
                     
                 </div>
@@ -53,7 +53,7 @@ admissionForm.controls['fatherName'].touched)" class="text-danger">
                             fatherName is required.
                         </div>
                     </div>
-                </div>
+                    </div>
                 </div>
                 <div class="form-group">
                     <label for="mobileNo" class="col-sm-4 control-label">Mobile No</label>
@@ -66,7 +66,7 @@ admissionForm.controls['mobileNo'].touched)" class="text-danger">
                             mobileNo is required.
                         </div>    
                     </div>
-                </div>
+                    </div>
                 </div>
 
                 <div class="form-group">
@@ -82,7 +82,7 @@ admissionForm.controls['tradeID'].touched)" class="text-danger">
                             tradeID is required.
                         </div>    
                     </div>
-                </div>
+                    </div>
                 </div>
                 <div class="form-group">
                     <label for="caste" class="col-sm-4 control-label">Caste</label>
@@ -97,19 +97,12 @@ admissionForm.controls['casteID'].touched)" class="text-danger">
                             casteID is required.
                         </div>    
                     </div>
-                </div>
+                    </div>
                 </div>
                 <div class="form-group">
                     <label for="category" class="col-sm-4 control-label">Category</label>
                     <div class="col-sm-7">
-                        <input type="text" class="form-control" formControlName ="category" id="category" placeholder="">
-                        <input type="text" class="form-control" formControlName ="presentAddress" id="address" placeholder="">
-                    
-                    <div *ngIf="admissionForm.controls['presentAddress'].invalid && (admissionForm.controls['presentAddress'].dirty || 
-admissionForm.controls['presentAddress'].touched)" class="text-danger">
-                        <div *ngIf="admissionForm.controls['presentAddress'].errors.required">
-                            address is required.
-                        </div>    
+                        <input type="text" class="form-control" formControlName ="category" id="category" placeholder="">                    
                     </div>
                 </div>
                 <div class="form-group">
@@ -140,8 +133,8 @@ admissionForm.controls['phaseID'].touched)" class="text-danger">
                             phaseID is required.
                         </div>    
                     </div>
+                    </div>
                 </div>
-            </div>
             </div>
 
             <!-- right column -->
@@ -234,7 +227,7 @@ admissionForm.controls['address'].touched)" class="text-danger">
                         </div>
                     </div>
             </div>
-        </div>
+
 
         <div>
            
@@ -269,25 +262,11 @@ admissionForm.controls['address'].touched)" class="text-danger">
                 <button type="button" (click)="resetForm()" class="btn btn-default mar_r10" id="newConsigneeReset">Reset</button>
              </div><!-- End Modal Footer -->
         
-
-    </form>
-            
+                </div>
+            </form>
         </div>
-        
-     
     </div>
-    </div>
+</div>
 </div>
 
 
-
-
-    
-
-
-
-
-
-
-
- 
