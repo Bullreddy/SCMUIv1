@@ -43,14 +43,11 @@ export class ApplicationformComponent implements OnInit {
     
    if(val!=null ) {
 
-console.log(val)
   this.classificationService.getFormByNumber(this.admissionForm.value).subscribe(res => {
 if(res!=null){
   
-    console.log(res);
     this.admissionForm.patchValue(res)
 
-    console.log(this.admissionForm.value)
    this.btnState="Update";
 }else{
   this.resetForm();
@@ -58,7 +55,6 @@ if(res!=null){
     admissionNo:val
   });
 }
-
 
 this.loadCertificates(this.admissionForm.value.scholarship)
 
@@ -76,8 +72,6 @@ this.loadCertificates(this.admissionForm.value.scholarship)
       this.selectedCertificates.push(data.item.id) 
     })
 
-    console.log(this.admissionForm.valid)
-
     if(this.admissionForm.valid) {
         this.student = this.admissionForm.value;
         this.student.certificateIds = this.selectedCertificates;
@@ -90,8 +84,7 @@ this.loadCertificates(this.admissionForm.value.scholarship)
 
         this.toast.success('Application Form saved Successfully.', 'Success');
         this.btnState="Update";
-       // this.admissionForm.value=res;
-         //this.classificationData = JSON.stringify(res);
+
        })
       
 
@@ -145,6 +138,7 @@ this.loadCertificates(this.admissionForm.value.scholarship)
       category: new FormControl(),
       academicYearID: new FormControl('', Validators.required),
       scholarship: new FormControl('', Validators.required),
+      identificationMarks: new FormControl()
     })
 
     this.phases = this.classificationService.phases;
@@ -160,8 +154,6 @@ this.loadCertificates(this.admissionForm.value.scholarship)
   public loadCertificates(scholarshipType: any){
     this.certificates = null;
     this.certificates = this.classificationService.getCertificates(scholarshipType);
-  
-    //this.itemResource = new DataTableResource(this.certificates);
   }
 
   rowClick(rowEvent) {
