@@ -14,7 +14,7 @@ import { ToastrService } from 'ngx-toastr';
 export class ApplicationformComponent implements OnInit {
 
   admissionForm: FormGroup;
-  certificates : any;
+  certificates : Array<{name: string, id: number,selected:boolean}> = [];;
   itemResource;
 
   public company:string[];
@@ -56,7 +56,11 @@ if(res!=null){
     admissionNo:val
   });
 }
-
+console.log(res)
+console.log(res['certificateIds'])
+this.selectedCertificates = res['certificateIds']
+console.log("CERTIFICATESID")
+console.log(res)
 this.loadCertificates(this.admissionForm.value.scholarship)
 
    })
@@ -68,13 +72,15 @@ this.loadCertificates(this.admissionForm.value.scholarship)
 
     this.student = this.admissionForm.value;
     this.student.certificateIds = this.selectedCertificates;
-    console.log(this.student)
+    console.log(this.certificatesTable.selectedRows)
 
     this.showValidationErrors();
-    this.certificatesTable.selectedRows.forEach(data =>{
+    this.selectedCertificates = [];
+    this.certificatesTable.rows.forEach(data =>{
+      if(data.item.selected)
       this.selectedCertificates.push(data.item.id) 
     })
-
+    console.log(this.selectedCertificates)
     if(this.admissionForm.valid) {
         this.student = this.admissionForm.value;
         this.student.certificateIds = this.selectedCertificates;
@@ -153,12 +159,30 @@ this.loadCertificates(this.admissionForm.value.scholarship)
 
 
   public loadCertificates(scholarshipType: any){
-    this.certificates = null;
-    this.certificates = this.classificationService.getCertificates(scholarshipType);
+    this.certificates = [];
+    this.classificationService.getCertificates(scholarshipType).subscribe(res => {
+      this.prepareCertificatesData(res);
+      console.log(this.selectedCertificates)
+      console.log(this.certificates)
+    });
+
+
   }
+
+  prepareCertificatesData(res){
+    res.classifications.forEach(data =>{
+      if(this.selectedCertificates){
+            console.log(this.selectedCertificates.includes(data.id))
+            console.log(data.id)
+            this.certificates.push({ name:data.name, id:data.id,selected:this.selectedCertificates.includes(data.id)})
+    }
+  })
+}
 
   rowClick(rowEvent) {
     console.log('Clicked: ' + rowEvent.row.item.id);
+    console.log('Clicked: ' + rowEvent.row.item.selected );
+    rowEvent.row.item.selected = !rowEvent.row.item.selected ;
   }
 
 }

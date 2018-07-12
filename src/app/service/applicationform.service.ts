@@ -8,6 +8,7 @@ import { ServiceApi } from '../constant/service.api.constant';
 import { map } from 'rxjs/operators/map';
 import { ToastrService } from 'ngx-toastr';
 import { TokenStorage} from '../token.storage';
+import { MAT_CHECKBOX_CONTROL_VALUE_ACCESSOR } from '@angular/material';
 
 @Injectable()
 export class ApplicationformService extends BehaviorSubject<any[]> {
@@ -65,18 +66,15 @@ export class ApplicationformService extends BehaviorSubject<any[]> {
          "SCHOLARSHIP"
       ],
     }
-    this.http.post(this.serviceApi.urlMethod('getCertificates'),
-          JSON.stringify(params),this._options).subscribe(res => {
-           this.prepareCertificatesData(res);
-           console.log(this.certificates)
-    });
-    return this.certificates;
+    return this.http.post(this.serviceApi.urlMethod('getCertificates'),
+          JSON.stringify(params),this._options);
+    //return this.certificates;
   }  
 
 
   prepareCertificatesData(res){
     res.classifications.forEach(data =>{
-      this.certificates.push({ name:data.name, id:data.id})
+      this.certificates.push({ name:data.name, id:data.id,selected:MAT_CHECKBOX_CONTROL_VALUE_ACCESSOR})
     })
   }
 
@@ -107,8 +105,6 @@ export class ApplicationformService extends BehaviorSubject<any[]> {
     
   }
   public saveAdmission (data:any){
-    console.log(this.serviceApi.urlMethod('createapplicationform'))
-    console.log(data)
     return this.http.post(this.serviceApi.urlMethod('createapplicationform'),data,this._options);
 
 }

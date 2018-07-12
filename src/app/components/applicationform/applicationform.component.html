@@ -242,9 +242,21 @@ admissionForm.controls['presentAddress'].touched)" class="text-danger">
                 [header]="true"
                 [title]="'Certificates'"
                 [items]="certificates"
-                [selectColumn]="true"
                 (rowClick)="rowClick($event)"
                 [pagination]="false">
+                <data-table-column
+                [property]="'selected'"
+                [header]="'Select'"
+                [width]="100"
+                [resizable]="true">
+
+                <ng-template #dataTableCell let-item="item">
+                    <span style="color: grey">
+                    <span class="fa fa-check" *ngIf="item.selected"></span>
+                    <span class="fa fa-times" *ngIf="!item.selected"></span>
+                    </span>
+                </ng-template>
+                 </data-table-column>
                 <data-table-column
                     [property]="'name'"
                     [header]="'Certificate Name'">
