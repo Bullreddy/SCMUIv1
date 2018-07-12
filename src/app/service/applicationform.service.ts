@@ -109,11 +109,7 @@ export class ApplicationformService extends BehaviorSubject<any[]> {
   public saveAdmission (data:any){
     console.log(this.serviceApi.urlMethod('createapplicationform'))
     console.log(data)
-    return this.http.post(this.serviceApi.urlMethod('createapplicationform'),data,this._options)
-    .subscribe(res => {
-      this.toast.success('Application Saved Successfully.', 'Success');
-      //this.classificationData = JSON.stringify(res);
-    })
+    return this.http.post(this.serviceApi.urlMethod('createapplicationform'),data,this._options);
 
 }
 private getHeader() {

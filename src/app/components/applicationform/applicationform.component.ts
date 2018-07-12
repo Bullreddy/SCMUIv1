@@ -37,6 +37,7 @@ export class ApplicationformComponent implements OnInit {
 
 
   }
+  
  public focusOutFunction(){
    let val=this.admissionForm.controls.admissionNo.value;
    
@@ -62,10 +63,12 @@ this.loadCertificates(this.admissionForm.value.scholarship)
   }
  }
   public saveAdmission() {
-    console.log('saveamission')
+
+    console.log(this.admissionForm)
 
     this.student = this.admissionForm.value;
     this.student.certificateIds = this.selectedCertificates;
+    console.log(this.student)
 
     this.showValidationErrors();
     this.certificatesTable.selectedRows.forEach(data =>{
@@ -77,7 +80,7 @@ this.loadCertificates(this.admissionForm.value.scholarship)
         this.student.certificateIds = this.selectedCertificates;
         this.classificationService.saveAdmission(this.student);
 
-        this.classificationService.saveAdmission(this.student).add(res => {
+        this.classificationService.saveAdmission(this.student).subscribe(res => {
 
 
         this.admissionForm.patchValue(res)
@@ -86,8 +89,6 @@ this.loadCertificates(this.admissionForm.value.scholarship)
         this.btnState="Update";
 
        })
-      
-
     }
   }
   public resetForm(){
