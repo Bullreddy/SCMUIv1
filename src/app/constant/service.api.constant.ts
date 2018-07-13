@@ -15,7 +15,8 @@ export class ServiceApi {
 		'downloadStudent':'student/exportStudents',
 		'login':'token/generate-token',
 		'getBranches':'services/rest/classification/getBranches',
-		'getCertificates':'services/rest/classifications/getCertificates'
+		'getCertificates':'services/rest/classifications/getCertificates',
+		'getStudent':'student/applyfilter'
 	}
 	public urlMethod(url: string) {
 

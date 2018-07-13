@@ -14,12 +14,15 @@
         </div>
         <div class="portlet-body">
             <div class="row"><div class="col-xs-12">
+                Phase:
   <select class="form-control width200 inlineblock" (change)="setFilter($event)" [(ngModel)]="phase" >
     <option *ngFor="let phase of phases" value="{{phase.id}}">{{phase.name}}</option>
-</select>
+</select> 
+        Trade:
 <select class="form-control width200 inlineblock" (change)="setFilter($event)" [(ngModel)]="trade" >
     <option *ngFor="let trade of trades" value="{{trade.id}}">{{trade.name}}</option>
 </select>  
+  Year:
 <select class="form-control width200 inlineblock"  (change)="setFilter($event)" [(ngModel)]="academicYear">
     <option *ngFor="let academicYear of academicYears" value="{{academicYear.id}}">{{academicYear.name}}</option>
 </select>

@@ -23,7 +23,8 @@ import { StudentlistComponent } from './components/studentlist/studentlist.compo
 import {Interceptor} from './app.interceptor';
 import {AuthGuard} from './auth.gaurd';
 import {TokenStorage} from './token.storage';
-import { BranchComponent } from './components/branch/branch.component'
+import { BranchComponent } from './components/branch/branch.component';
+import {SharedService} from  './service/shared';
 @NgModule({
   declarations: [
     AppComponent,
@@ -40,7 +41,7 @@ import { BranchComponent } from './components/branch/branch.component'
   ],
   providers: [ {provide:HTTP_INTERCEPTORS,useClass:Interceptor,multi:true}
     ,{provide: LocationStrategy, useClass: HashLocationStrategy},
-    ServiceApi,TokenStorage,HttpModule,AuthGuard], 
+    ServiceApi,TokenStorage,SharedService,HttpModule,AuthGuard], 
    schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent]
 })

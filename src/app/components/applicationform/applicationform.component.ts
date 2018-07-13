@@ -1,10 +1,10 @@
-import { Component,ViewChild , OnInit } from '@angular/core';
+import { Component,ViewChild , OnInit ,Input, HostBinding} from '@angular/core';
 import { Validators, FormGroup, FormControl, FormBuilder ,FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {ApplicationformService} from '../../service/applicationform.service';
 import { Student } from '../../constant/model/Student';
 import { DataTable,DataTableResource } from 'angular5-data-table';
 import { ToastrService } from 'ngx-toastr';
-
+import {SharedService} from '../../service/shared';
 @Component({
   selector: 'app-applicationform',
   templateUrl: './applicationform.component.html',
@@ -12,7 +12,8 @@ import { ToastrService } from 'ngx-toastr';
   providers: [ApplicationformService]
 })
 export class ApplicationformComponent implements OnInit {
-
+@HostBinding('class-in.open') @Input()  
+itemchange:number;
   admissionForm: FormGroup;
   certificates : Array<{name: string, id: number,selected:boolean}> = [];;
   itemResource;
@@ -33,8 +34,7 @@ export class ApplicationformComponent implements OnInit {
   @ViewChild(DataTable) certificatesTable: DataTable;
 
 
-  constructor(private classificationService:ApplicationformService,fb:FormBuilder,private toast:ToastrService) { 
-
+  constructor(private classificationService:ApplicationformService,private SharedService:SharedService,fb:FormBuilder,private toast:ToastrService) { 
 
   }
   
@@ -124,6 +124,8 @@ this.loadCertificates(this.admissionForm.value.scholarship)
   }
 
   ngOnInit() {
+
+ 
     this.admissionForm = new FormGroup({
       admissionNo: new FormControl('', Validators.required),
       mobileNo:new FormControl('', Validators.required),
@@ -155,6 +157,20 @@ this.loadCertificates(this.admissionForm.value.scholarship)
     this.academicYears = this.classificationService.academicYears;
     this.scholarships = this.classificationService.scholarships;
 
+
+    this.itemchange
+    this.SharedService.itemchanges.subscribe(user => {
+      this.itemchange=user;
+    
+     console.log(this.itemchange)
+     console.log(user)
+     this.resetForm();
+     this.admissionForm.patchValue({
+       admissionNo:this.itemchange
+     });
+    }, err => {
+      console.log(err);
+    });
   }
 
 
