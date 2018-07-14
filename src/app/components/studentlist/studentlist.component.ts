@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { DataTableResource } from 'angular5-data-table';
 import { StudentService } from '../../service/studentservice.service';
+import { ClassificationService } from '../../service/classificationService';
 
 @Component({
   selector: 'data-table-demo-1',
   templateUrl: './studentlist.component.html',
   styleUrls: ['./studentlist.component.css'],
-  providers: [StudentService]
+  providers: [StudentService,ClassificationService]
 })
 export class StudentlistComponent implements OnInit {
 
@@ -15,35 +16,54 @@ export class StudentlistComponent implements OnInit {
   items = [];
   itemCount = 0;
   limits = [10, 20, 40, 80];
+  phase;
+  trade;
+  academicYear;
 
-  constructor(private studentService :StudentService) {
-      
+  public phases: Array<{name: string, id: number}> = [];
+  public trades: Array<{name: string, id: number}> = [];
+  public academicYears: Array<{name: string, id: number}> = [];
+
+
+  constructor(private studentService :StudentService,private classificationService :ClassificationService) {
+
   }
 
   ngOnInit(){
       
+    this.phases = this.classificationService.phases;
+    this.trades = this.classificationService.trades;
+    this.academicYears = this.classificationService.academicYears;
+    console.log(this.phases)
     this.showStudentList();
        
     
+  }
+
+  setFilter(rowEvent){
+
+    this.showStudentList();
   }
 
   reloadItems(params) {
    // console.log( this.itemResource)
     if(this.itemResource!=undefined)
       this.itemResource.query(params).then(items => this.items = items);
-      console.log(this.itemResource)
   }
   showStudentList(): void {
-    this.studentService.getStudents()
+    const branchID = this.classificationService.branchID
+    const params = {
+      "phaseID" : this.phase,
+      "tradeID" : this.trade,
+      "academicYearID" : this.academicYear,
+      "branchID" :branchID
+    }
+    this.studentService.getStudents(params)
       .subscribe(heroes => {
-          this.students = heroes;
-        console.log(this.students);
-         
+          this.students = heroes;   
      
       
         this.itemResource = new DataTableResource(this.students);
-       
-        console.log(this.itemResource)
         this.reloadItems('');
         this.itemResource.count().then(count => this.itemCount = count);
        

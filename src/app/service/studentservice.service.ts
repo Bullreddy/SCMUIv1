@@ -13,7 +13,7 @@ import { catchError } from 'rxjs/operators';
 @Injectable()
 export class StudentService extends BehaviorSubject<any[]> {
 
-
+  private _options = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
   public students :  any;  
 
   constructor(private http:HttpClient,private serviceApi:ServiceApi) { 
@@ -21,8 +21,9 @@ super([])
   }
 
  
-  getStudents (): Observable<any> {
-    return this.http.get(this.serviceApi.urlMethod('getAllStudents'))
+  getStudents (params): Observable<any> {
+
+    return this.http.post(this.serviceApi.urlMethod('getStudents'),JSON.stringify(params),this._options)
   }
   exportStudents() {
 
