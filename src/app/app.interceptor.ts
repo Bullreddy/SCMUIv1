@@ -22,11 +22,10 @@ export class Interceptor implements HttpInterceptor {
 
       let authReq = req;
     if (this.token.getToken() != null) {
-      console.log('s')
       authReq = req.clone({
         setHeaders:{
 
-'Authorization':`Bearer ${this.token.getToken()}`
+            'Authorization':`Bearer ${this.token.getToken()}`
         }
       
          //headers: req.headers.set(TOKEN_HEADER_KEY, 'Bearer ' + this.token.getToken())

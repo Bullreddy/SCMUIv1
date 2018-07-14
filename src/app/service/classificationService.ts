@@ -21,7 +21,6 @@ export class ClassificationService{
   constructor(private http:HttpClient,private serviceApi:ServiceApi,private token: TokenStorage) { 
         
         this.branchID = this.token.getItem("BranchID");
-        console.log(this.branchID)
         this.getClassifications()
   }
 

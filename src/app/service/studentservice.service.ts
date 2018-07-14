@@ -25,27 +25,29 @@ super([])
 
     return this.http.post(this.serviceApi.urlMethod('getStudents'),JSON.stringify(params),this._options)
   }
-  exportStudents() {
 
-  return this.downloadFile();
-  }
 
-saveFile = (blobContent: Blob, fileName: string) => {
+saveFile = (blobContent: any, fileName: string) => {
     const blob = new Blob([blobContent], { type: 'application/octet-stream' });
-    console.log(blob)
-    console.log(fileName)
     saveAs(blob, fileName);
 };
 
-  downloadFile() {
-    const url = this.serviceApi.urlMethod('downloadStudent');
-    
+  downloadFile(params) {
+   // const url = this.serviceApi.urlMethod('downloadStudent')+"/"+JSON.stringify(students);
+   const url = this.serviceApi.urlMethod('downloadStudent');
     const options = new RequestOptions({responseType: ResponseContentType.Blob });
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json',
+        'responseType': 'blob'
+      })
+    }
 
-    this.http.get(url, {responseType:'blob'}).subscribe(res => {
-      console.log(res)
+    const _options = { headers: new HttpHeaders({ 'Content-Type': 'application/json',responseType:'blob' }) };
+
+    this.http.post(url, params,{responseType:'blob'}).subscribe(res => {
+
         const fileName = "studentlist.xls";
-        console.log(res)
         this.saveFile(res, fileName);
     });
 }

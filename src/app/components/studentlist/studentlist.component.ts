@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { DataTableResource } from 'angular5-data-table';
+import { Component,ViewChild, OnInit } from '@angular/core';
+import { DataTable, DataTableResource } from 'angular5-data-table';
 import { StudentService } from '../../service/studentservice.service';
 import { ClassificationService } from '../../service/classificationService';
 
@@ -23,7 +23,9 @@ export class StudentlistComponent implements OnInit {
   public phases: Array<{name: string, id: number}> = [];
   public trades: Array<{name: string, id: number}> = [];
   public academicYears: Array<{name: string, id: number}> = [];
+  public selectedStudents = [];
 
+  @ViewChild(DataTable) studentsable: DataTable;
 
   constructor(private studentService :StudentService,private classificationService :ClassificationService) {
 
@@ -84,7 +86,19 @@ export class StudentlistComponent implements OnInit {
   }
 
   exportStudents(){
-      this.studentService.downloadFile()
+    this.studentsable.selectedRows.forEach(row =>{
+      this.selectedStudents.push(row.item.id)
+    })
+    const params = {
+      "phaseID" : this.phase,
+      "tradeID" : this.trade,
+      "academicYearID" : this.academicYear,
+      "branchID" :this.classificationService.branchID,
+      "students" : this.selectedStudents
+    }
+   
+
+    this.studentService.downloadFile(params)
   }
 
 }
