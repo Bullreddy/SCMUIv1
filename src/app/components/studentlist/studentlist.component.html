@@ -13,17 +13,30 @@
             </div>    
         </div>
         <div class="portlet-body">
-            <div class="row"><div class="col-xs-12">
-  <select class="form-control width200 inlineblock" (change)="setFilter($event)" [(ngModel)]="phase" >
-    <option *ngFor="let phase of phases" value="{{phase.id}}">{{phase.name}}</option>
-</select>
-<select class="form-control width200 inlineblock" (change)="setFilter($event)" [(ngModel)]="trade" >
-    <option *ngFor="let trade of trades" value="{{trade.id}}">{{trade.name}}</option>
-</select>  
-<select class="form-control width200 inlineblock"  (change)="setFilter($event)" [(ngModel)]="academicYear">
-    <option *ngFor="let academicYear of academicYears" value="{{academicYear.id}}">{{academicYear.name}}</option>
-</select>
-</div></div>
+            <div class="row">
+                <div class="col-xs-6">
+                        <label for="academicYear" class="col-sm-4 control-label">Academic Year</label>
+                    <select class="form-control width200 inlineblock"  (change)="setFilter($event)" [(ngModel)]="academicYear">
+                        <option *ngFor="let academicYear of academicYears" value="{{academicYear.id}}">{{academicYear.name}}</option>
+                    </select>
+                </div>
+                <div class="col-xs-6">
+                    <label for="phase" class="col-sm-4 control-label">Phase</label>
+                    <select class="form-control width200 inlineblock" (change)="setFilter($event)" [(ngModel)]="phase" >
+                        <option *ngFor="let phase of phases" value="{{phase.id}}">{{phase.name}}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+
+            <div class="col-xs-6">
+                    <label for="trade" class="col-sm-4 control-label">Trade</label>
+                    <select class="form-control width200 inlineblock" (change)="setFilter($event)" [(ngModel)]="trade" >
+                        <option *ngFor="let trade of trades" value="{{trade.id}}">{{trade.name}}</option>
+                    </select>  
+                </div>
+            </div>
+
 <div class="row"><div class="col-xs-12">
 <button type="submit" class="btn btn-primary pull-right " id="exportStudentsbtn" (click)="exportStudents()">Export</button>
   
