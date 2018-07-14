@@ -2,6 +2,7 @@ import { Component,ViewChild, OnInit } from '@angular/core';
 import { DataTable, DataTableResource } from 'angular5-data-table';
 import { StudentService } from '../../service/studentservice.service';
 import { ClassificationService } from '../../service/classificationService';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'data-table-demo-1',
@@ -27,7 +28,7 @@ export class StudentlistComponent implements OnInit {
 
   @ViewChild(DataTable) studentsable: DataTable;
 
-  constructor(private studentService :StudentService,private classificationService :ClassificationService) {
+  constructor(private studentService :StudentService,private classificationService :ClassificationService,private router: Router) {
 
   }
 
@@ -74,7 +75,8 @@ export class StudentlistComponent implements OnInit {
   }
   // special properties:
   rowClick(rowEvent) {
-      console.log('Clicked: ' + rowEvent.row.item.name);
+      console.log('Clicked: ' + rowEvent.row.item.admissionNo);
+      this.router.navigate(['applicationform'],{ queryParams: { admissionNo: rowEvent.row.item.admissionNo} })
   }
 
   rowDoubleClick(rowEvent) {

@@ -4,6 +4,7 @@ import {ApplicationformService} from '../../service/applicationform.service';
 import { Student } from '../../constant/model/Student';
 import { DataTable,DataTableResource } from 'angular5-data-table';
 import { ToastrService } from 'ngx-toastr';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-applicationform',
@@ -28,43 +29,42 @@ export class ApplicationformComponent implements OnInit {
   public classificationData:string;
   public  btnState:string ="create";
   public student:Student;
+  public paramAdmissionNo :string;
 
 
   @ViewChild(DataTable) certificatesTable: DataTable;
 
 
-  constructor(private classificationService:ApplicationformService,fb:FormBuilder,private toast:ToastrService) { 
+  constructor(private classificationService:ApplicationformService,fb:FormBuilder,private toast:ToastrService,    private route: ActivatedRoute,
+    private router: Router) { 
 
 
   }
   
  public focusOutFunction(){
    let val=this.admissionForm.controls.admissionNo.value;
-   
-    
+   if(this.paramAdmissionNo!=null){
+    this.admissionForm.patchValue({
+      admissionNo:this.paramAdmissionNo
+     });
+    }
+
+      console.log(this.admissionForm.value)
    if(val!=null ) {
-
-  this.classificationService.getFormByNumber(this.admissionForm.value).subscribe(res => {
-if(res!=null){
-  
-    this.admissionForm.patchValue(res)
-
-   this.btnState="Update";
-}else{
-  this.resetForm();
-  this.admissionForm.patchValue({
-    admissionNo:val
-  });
-}
-console.log(res)
-console.log(res['certificateIds'])
-this.selectedCertificates = res['certificateIds']
-console.log("CERTIFICATESID")
-console.log(res)
-this.loadCertificates(this.admissionForm.value.scholarship)
-
-   })
-  }
+       this.classificationService.getFormByNumber(this.admissionForm.value).subscribe(res => {
+          if(res!=null){
+            this.admissionForm.patchValue(res)
+            this.btnState="Update";
+            this.selectedCertificates = res['certificateIds']
+            this.loadCertificates(this.admissionForm.value.scholarship)
+          }else{
+            this.resetForm();
+            this.admissionForm.patchValue({
+              admissionNo:val
+            });
+          }
+        })
+    }
  }
   public saveAdmission() {
 
@@ -155,6 +155,15 @@ this.loadCertificates(this.admissionForm.value.scholarship)
     this.academicYears = this.classificationService.academicYears;
     this.scholarships = this.classificationService.scholarships;
 
+    this.route
+      .queryParams
+      .subscribe(params => {
+        console.log(this.admissionForm.controls.admissionNo.value)
+        console.log(params['admissionNo']);
+        this.paramAdmissionNo = params['admissionNo']
+        if(this.paramAdmissionNo)
+            this.focusOutFunction()
+      });
   }
 
 
