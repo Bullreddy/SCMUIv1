@@ -1,4 +1,6 @@
 
+
+
 <div class="row">
     <div class="col-md-12">
 
@@ -44,6 +46,7 @@
       [pageLimits]="limits"
       [selectColumn]="true"
       [pagination]="true"
+      [scrollX]="true"
       [selectOnRowClick]="true"
       [footerHeight]="50"
       (reload)="reloadItems($event)"
@@ -81,27 +84,27 @@
       <data-table-column
           property="mobileNo"
           header="Mobile number"
-          width="100px">
+          width="150px">
       </data-table-column>
       <data-table-column
           property="aadharNo"
           header="Aadhar number"
-          width="100px">
+          width="150px">
       </data-table-column>
       <data-table-column
           property="scholarship"
           header="Scholarship"
-          width="50px">
+          width="150px">
       </data-table-column>
       <data-table-column
       property="shift"
       header="Shift"
-      width="50px">
+      width="150px">
   </data-table-column>
   <data-table-column
   property="category"
   header="Category"
-  width="100px">
+  width="150px">
 </data-table-column>
       <data-table-column
           property="trade"
