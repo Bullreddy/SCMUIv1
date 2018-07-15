@@ -13,22 +13,6 @@
             </div>    
         </div>
         <div class="portlet-body">
-<<<<<<< HEAD
-            <div class="row"><div class="col-xs-12">
-                Phase:
-  <select class="form-control width200 inlineblock" (change)="setFilter($event)" [(ngModel)]="phase" >
-    <option *ngFor="let phase of phases" value="{{phase.id}}">{{phase.name}}</option>
-</select> 
-        Trade:
-<select class="form-control width200 inlineblock" (change)="setFilter($event)" [(ngModel)]="trade" >
-    <option *ngFor="let trade of trades" value="{{trade.id}}">{{trade.name}}</option>
-</select>  
-  Year:
-<select class="form-control width200 inlineblock"  (change)="setFilter($event)" [(ngModel)]="academicYear">
-    <option *ngFor="let academicYear of academicYears" value="{{academicYear.id}}">{{academicYear.name}}</option>
-</select>
-</div></div>
-=======
             <div class="row">
                 <div class="col-xs-6">
                         <label for="academicYear" class="col-sm-4 control-label">Academic Year</label>
@@ -53,16 +37,16 @@
                 </div>
             </div>
 
->>>>>>> ae546be19b96e5009e39d73d854fc5b67d284624
 <div class="row"><div class="col-xs-12">
 <button type="submit" class="btn btn-primary pull-right " id="exportStudentsbtn" (click)="exportStudents()">Export</button>
   
-  <data-table 
+  <data-table width="100%"
       [items]="items"
       [itemCount]="itemCount"
       [pageLimits]="limits"
       [selectColumn]="true"
       [pagination]="true"
+      [scrollX]="true"
       [selectOnRowClick]="true"
       [footerHeight]="50"
       (reload)="reloadItems($event)"
@@ -70,20 +54,65 @@
       (rowDoubleClick)="rowDoubleClick($event)"
       [rowTooltip]="rowTooltip" >
       <data-table-column
+          [property]="'admissionNo'"
+          [header]="'Admission No'"
+          [sortable]="true"
+          [resizable]="true">
+      </data-table-column>
+      <data-table-column
           [property]="'name'"
           [header]="'Name'"
           [sortable]="true"
           [resizable]="true">
       </data-table-column>
       <data-table-column
+      [property]="dob"
+      [header]="'DOB'"
+      [sortable]="true"
+      [resizable]="true">
+  </data-table-column>
+      <data-table-column
           [property]="'fatherName'"
           [header]="'Father Name'"
+          [sortable]="true">
+      </data-table-column>
+      <data-table-column
+          [property]="'motherName'"
+          [header]="'Mother Name'"
           [sortable]="true">
       </data-table-column>
       <data-table-column
           property="mobileNo"
           header="Mobile number"
           width="150px">
+      </data-table-column>
+      <data-table-column
+          property="aadharNo"
+          header="Aadhar number"
+          width="150px">
+      </data-table-column>
+      <data-table-column
+          property="scholarship"
+          header="Scholarship"
+          width="150px">
+      </data-table-column>
+      <data-table-column
+      property="shift"
+      header="Shift"
+      width="150px">
+  </data-table-column>
+  <data-table-column
+  property="category"
+  header="Category"
+  width="150px">
+</data-table-column>
+      <data-table-column
+          property="trade"
+          header="Trade ">
+          <ng-template #dataTableCell let-item="item">
+              <span *ngIf="item.tradeID">{{item.trade.name}}</span>
+          </ng-template>
+         
       </data-table-column>
       <data-table-column
           [property]="'caste'"

@@ -14,23 +14,18 @@ import { catchError } from 'rxjs/operators';
 @Injectable()
 export class StudentService extends BehaviorSubject<any[]> {
 
-<<<<<<< HEAD
 
   private _options = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
   public trades: Array<{name: string, id: number}> = []; 
   public phases: Array<{name: string, id: number}> = [];
   public academicYears: Array<{name: string, id: number}> = [];
-=======
-  private _options = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
->>>>>>> ae546be19b96e5009e39d73d854fc5b67d284624
-  public students :  any;  
+ public students :  any;  
 
   constructor(private http:HttpClient,private serviceApi:ServiceApi,private token: TokenStorage) { 
 super([])
 this.getClassifications();
   }
 
-<<<<<<< HEAD
   getStudentByFilter (data:any): Observable<any> {
    
     let params = new HttpParams();
@@ -40,14 +35,10 @@ this.getClassifications();
     return this.http.get(this.serviceApi.urlMethod('getStudent'),{params:params});
     
   }
-  getStudents (): Observable<any> {
-    return this.http.get(this.serviceApi.urlMethod('getAllStudents'))
-  }
-  exportStudents() {
-=======
+ 
+  
  
   getStudents (params): Observable<any> {
->>>>>>> ae546be19b96e5009e39d73d854fc5b67d284624
 
     return this.http.post(this.serviceApi.urlMethod('getStudents'),JSON.stringify(params),this._options)
   }
@@ -72,12 +63,9 @@ private getClassifications() {
   
 });
 
-<<<<<<< HEAD
 }
 loadDropdowns(res){
-  this.phases.push({name:"All",id:0});
-  this.trades.push({name:"All",id:0});
-  this.academicYears.push({name:"All",id:0});
+
   res.classifications.forEach(data => {
     let type = data.type;
     if(type === "PHASE")
@@ -89,14 +77,10 @@ loadDropdowns(res){
   
 }) 
 }
-  downloadFile() {
-    const url = this.serviceApi.urlMethod('downloadStudent');
-    
-=======
+  
   downloadFile(params) {
    // const url = this.serviceApi.urlMethod('downloadStudent')+"/"+JSON.stringify(students);
    const url = this.serviceApi.urlMethod('downloadStudent');
->>>>>>> ae546be19b96e5009e39d73d854fc5b67d284624
     const options = new RequestOptions({responseType: ResponseContentType.Blob });
     const httpOptions = {
       headers: new HttpHeaders({
