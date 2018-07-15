@@ -76,11 +76,13 @@ export class StudentlistComponent implements OnInit {
   // special properties:
   rowClick(rowEvent) {
       console.log('Clicked: ' + rowEvent.row.item.admissionNo);
-      this.router.navigate(['applicationform'],{ queryParams: { admissionNo: rowEvent.row.item.admissionNo} })
+     // this.router.navigate(['applicationform'],{ queryParams: { admissionNo: rowEvent.row.item.admissionNo} })
   }
 
   rowDoubleClick(rowEvent) {
-      alert('Double clicked: ' + rowEvent.row.item.name);
+    console.log('Clicked: ' + rowEvent.row.item.admissionNo);
+    this.router.navigate(['applicationform'],{ queryParams: { admissionNo: rowEvent.row.item.admissionNo} })
+
   }
 
   rowTooltip(item) {
