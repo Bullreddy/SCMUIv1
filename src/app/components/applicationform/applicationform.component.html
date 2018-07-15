@@ -15,7 +15,15 @@
                 <input type="hidden" formControlName ="id" id="id" />
                 <div class="form-group form-group-sm">
             <!-- left column -->
-            <div class="col-sm-6">
+            <div class="col-sm-6">      
+                <div class="form-group">
+                        <label for="academicYearID" class="col-sm-4 control-label">Academic Year</label>
+                        <div class="col-sm-7">
+                            <select class="form-control" formControlName ="academicYearID" id="academicYearID" >
+                                <option *ngFor="let academicYear of academicYears" value="{{academicYear.id}}">{{academicYear.name}}</option>
+                            </select>
+                        </div>
+                </div>
                 <div class="form-group">
                             <label for="admissionNo" class="col-sm-4 control-label">Admission No</label>
                             <div class="col-sm-7">
@@ -105,36 +113,16 @@ admissionForm.controls['casteID'].touched)" class="text-danger">
                         <input type="text" class="form-control" formControlName ="category" id="category" placeholder="">                    
                     </div>
                 </div>
+
                 <div class="form-group">
-                        <label for="type" class="col-sm-4 control-label">Type</label>
+                        <label for="scholarship" class="col-sm-4 control-label">Scholarship</label>
                         <div class="col-sm-7">
-                            <select class="form-control" formControlName ="typeID" id="typeID" >
-                                <option *ngFor="let type of types" value="{{type.id}}">{{type.name}}</option>
+                            <select class="form-control" formControlName ="scholarship" id="scholarship" (change)="loadCertificates($event.target.value)">
+                                <option *ngFor="let scholarship of scholarships" value="{{scholarship.id}}">{{scholarship.name}}</option>
                             </select>
-                       
-                        <div *ngIf="admissionForm.controls['typeID'].invalid && (admissionForm.controls['typeID'].dirty || 
-admissionForm.controls['typeID'].touched)" class="text-danger">
-                            <div *ngIf="admissionForm.controls['typeID'].errors.required">
-                                typeID is required.
-                            </div>    
                         </div>
-                    </div>
                 </div>
-                <div class="form-group">
-                    <label for="phase" class="col-sm-4 control-label">Phase</label>
-                    <div class="col-sm-7">
-                        <select class="form-control" formControlName ="phaseID" id="phaseID" >
-                            <option *ngFor="let phase of phases" value="{{phase.id}}">{{phase.name}}</option>
-                        </select>
-                   
-                    <div *ngIf="admissionForm.controls['phaseID'].invalid && (admissionForm.controls['phaseID'].dirty || 
-admissionForm.controls['phaseID'].touched)" class="text-danger">
-                        <div *ngIf="admissionForm.controls['phaseID'].errors.required">
-                            phaseID is required.
-                        </div>    
-                    </div>
-                    </div>
-                </div>
+                
                 <div class="form-group">
                         <label for="identificationMarks" class="col-sm-4 control-label">Identification Marks</label>
                         <div class="col-sm-7">
@@ -145,6 +133,21 @@ admissionForm.controls['phaseID'].touched)" class="text-danger">
 
             <!-- right column -->
             <div class="col-sm-6">
+                    <div class="form-group">
+                            <label for="phase" class="col-sm-4 control-label">Phase</label>
+                            <div class="col-sm-7">
+                                <select class="form-control" formControlName ="phaseID" id="phaseID" >
+                                    <option *ngFor="let phase of phases" value="{{phase.id}}">{{phase.name}}</option>
+                                </select>
+                           
+                            <div *ngIf="admissionForm.controls['phaseID'].invalid && (admissionForm.controls['phaseID'].dirty || 
+        admissionForm.controls['phaseID'].touched)" class="text-danger">
+                                <div *ngIf="admissionForm.controls['phaseID'].errors.required">
+                                    phaseID is required.
+                                </div>    
+                            </div>
+                            </div>
+                    </div>
                     <div class="form-group">
                         <label for="regNo" class="col-sm-4 control-label">Registration No</label>
                         <div class="col-sm-7">
@@ -215,26 +218,28 @@ admissionForm.controls['presentAddress'].touched)" class="text-danger">
                         </div>
                          </div>
                     </div>
-
                     <div class="form-group">
-                            <label for="academicYearID" class="col-sm-4 control-label">Academic Year</label>
+                            <label for="type" class="col-sm-4 control-label">Type</label>
                             <div class="col-sm-7">
-                                <select class="form-control" formControlName ="academicYearID" id="academicYearID" >
-                                    <option *ngFor="let academicYear of academicYears" value="{{academicYear.id}}">{{academicYear.name}}</option>
+                                <select class="form-control" formControlName ="typeID" id="typeID" >
+                                    <option *ngFor="let type of types" value="{{type.id}}">{{type.name}}</option>
                                 </select>
+                           
+                            <div *ngIf="admissionForm.controls['typeID'].invalid && (admissionForm.controls['typeID'].dirty || 
+    admissionForm.controls['typeID'].touched)" class="text-danger">
+                                <div *ngIf="admissionForm.controls['typeID'].errors.required">
+                                    typeID is required.
+                                </div>    
                             </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="scholarship" class="col-sm-4 control-label">Scholarship</label>
-                        <div class="col-sm-7">
-                            <select class="form-control" formControlName ="scholarship" id="scholarship" (change)="loadCertificates($event.target.value)">
-                                <option *ngFor="let scholarship of scholarships" value="{{scholarship.id}}">{{scholarship.name}}</option>
-                            </select>
                         </div>
                     </div>
+
                     <div class="form-group">
-                        
-                    </div>
+                        <label for="photoSubmitted" class="col-sm-4 control-label">Photo Submitted</label>
+                        <div class="col-sm-2">
+                            <input type="checkbox"  formControlName ="photoSubmitted" id="photoSubmitted" placeholder="">
+                        </div>
+                    </div>    
             </div>
 
             <data-table

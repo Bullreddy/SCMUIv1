@@ -72,7 +72,6 @@ export class ApplicationformComponent implements OnInit {
 
     this.student = this.admissionForm.value;
     this.student.certificateIds = this.selectedCertificates;
-    console.log(this.certificatesTable.selectedRows)
 
     this.showValidationErrors();
     this.selectedCertificates = [];
@@ -80,11 +79,10 @@ export class ApplicationformComponent implements OnInit {
       if(data.item.selected)
       this.selectedCertificates.push(data.item.id) 
     })
-    console.log(this.selectedCertificates)
+
     if(this.admissionForm.valid) {
         this.student = this.admissionForm.value;
         this.student.certificateIds = this.selectedCertificates;
-        this.classificationService.saveAdmission(this.student);
 
         this.classificationService.saveAdmission(this.student).subscribe(res => {
 
@@ -146,7 +144,8 @@ export class ApplicationformComponent implements OnInit {
       category: new FormControl(),
       academicYearID: new FormControl('', Validators.required),
       scholarship: new FormControl('', Validators.required),
-      identificationMarks: new FormControl()
+      identificationMarks: new FormControl(),
+      photoSubmitted: new FormControl()
     })
 
     this.phases = this.classificationService.phases;
