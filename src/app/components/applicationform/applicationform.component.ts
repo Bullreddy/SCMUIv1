@@ -101,7 +101,8 @@ export class ApplicationformComponent implements OnInit {
     this.btnState="Create";
     this.admissionForm.reset();
     this.admissionForm.patchValue({});
-
+    this.selectedCertificates = [];
+    this.loadCertificates(null)
   }
 
   public showValidationErrors(){
@@ -169,12 +170,13 @@ export class ApplicationformComponent implements OnInit {
 
   public loadCertificates(scholarshipType: any){
     this.certificates = [];
-    this.classificationService.getCertificates(scholarshipType).subscribe(res => {
-      this.prepareCertificatesData(res);
-      console.log(this.selectedCertificates)
-      console.log(this.certificates)
-    });
-
+    if(scholarshipType!=null){
+      this.classificationService.getCertificates(scholarshipType).subscribe(res => {
+        this.prepareCertificatesData(res);
+        console.log(this.selectedCertificates)
+        console.log(this.certificates)
+      });
+    }
 
   }
 
