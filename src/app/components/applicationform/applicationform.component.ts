@@ -4,7 +4,11 @@ import {ApplicationformService} from '../../service/applicationform.service';
 import { Student } from '../../constant/model/Student';
 import { DataTable,DataTableResource } from 'angular5-data-table';
 import { ToastrService } from 'ngx-toastr';
+
 import {SharedService} from '../../service/shared';
+
+import { ActivatedRoute, Router } from '@angular/router';
+
 @Component({
   selector: 'app-applicationform',
   templateUrl: './applicationform.component.html',
@@ -29,42 +33,44 @@ itemchange:number;
   public classificationData:string;
   public  btnState:string ="create";
   public student:Student;
+  public paramAdmissionNo :string;
 
 
   @ViewChild(DataTable) certificatesTable: DataTable;
 
 
-  constructor(private classificationService:ApplicationformService,private SharedService:SharedService,fb:FormBuilder,private toast:ToastrService) { 
+
+  
+  constructor(private classificationService:ApplicationformService,private SharedService:SharedService,fb:FormBuilder,private toast:ToastrService,    private route: ActivatedRoute,
+    private router: Router) { 
+
 
   }
   
  public focusOutFunction(){
    let val=this.admissionForm.controls.admissionNo.value;
-   
-    
+   if(this.paramAdmissionNo!=null){
+    this.admissionForm.patchValue({
+      admissionNo:this.paramAdmissionNo
+     });
+    }
+
+      console.log(this.admissionForm.value)
    if(val!=null ) {
-
-  this.classificationService.getFormByNumber(this.admissionForm.value).subscribe(res => {
-if(res!=null){
-  
-    this.admissionForm.patchValue(res)
-
-   this.btnState="Update";
-}else{
-  this.resetForm();
-  this.admissionForm.patchValue({
-    admissionNo:val
-  });
-}
-console.log(res)
-console.log(res['certificateIds'])
-this.selectedCertificates = res['certificateIds']
-console.log("CERTIFICATESID")
-console.log(res)
-this.loadCertificates(this.admissionForm.value.scholarship)
-
-   })
-  }
+       this.classificationService.getFormByNumber(this.admissionForm.value).subscribe(res => {
+          if(res!=null){
+            this.admissionForm.patchValue(res)
+            this.btnState="Update";
+            this.selectedCertificates = res['certificateIds']
+            this.loadCertificates(this.admissionForm.value.scholarship)
+          }else{
+            this.resetForm();
+            this.admissionForm.patchValue({
+              admissionNo:val
+            });
+          }
+        })
+    }
  }
   public saveAdmission() {
 
@@ -72,7 +78,6 @@ this.loadCertificates(this.admissionForm.value.scholarship)
 
     this.student = this.admissionForm.value;
     this.student.certificateIds = this.selectedCertificates;
-    console.log(this.certificatesTable.selectedRows)
 
     this.showValidationErrors();
     this.selectedCertificates = [];
@@ -80,11 +85,10 @@ this.loadCertificates(this.admissionForm.value.scholarship)
       if(data.item.selected)
       this.selectedCertificates.push(data.item.id) 
     })
-    console.log(this.selectedCertificates)
+
     if(this.admissionForm.valid) {
         this.student = this.admissionForm.value;
         this.student.certificateIds = this.selectedCertificates;
-        this.classificationService.saveAdmission(this.student);
 
         this.classificationService.saveAdmission(this.student).subscribe(res => {
 
@@ -101,7 +105,8 @@ this.loadCertificates(this.admissionForm.value.scholarship)
     this.btnState="Create";
     this.admissionForm.reset();
     this.admissionForm.patchValue({});
-
+    this.selectedCertificates = [];
+    this.loadCertificates(null)
   }
 
   public showValidationErrors(){
@@ -147,7 +152,8 @@ this.loadCertificates(this.admissionForm.value.scholarship)
       category: new FormControl(),
       academicYearID: new FormControl('', Validators.required),
       scholarship: new FormControl('', Validators.required),
-      identificationMarks: new FormControl()
+      identificationMarks: new FormControl(),
+      photoSubmitted: new FormControl()
     })
 
     this.phases = this.classificationService.phases;
@@ -171,17 +177,28 @@ this. showValidationErrors();
     }, err => {
       console.log(err);
     });
+
+    this.route
+      .queryParams
+      .subscribe(params => {
+        console.log(this.admissionForm.controls.admissionNo.value)
+        console.log(params['admissionNo']);
+        this.paramAdmissionNo = params['admissionNo']
+        if(this.paramAdmissionNo)
+            this.focusOutFunction()
+      });
   }
 
 
   public loadCertificates(scholarshipType: any){
     this.certificates = [];
-    this.classificationService.getCertificates(scholarshipType).subscribe(res => {
-      this.prepareCertificatesData(res);
-      console.log(this.selectedCertificates)
-      console.log(this.certificates)
-    });
-
+    if(scholarshipType!=null){
+      this.classificationService.getCertificates(scholarshipType).subscribe(res => {
+        this.prepareCertificatesData(res);
+        console.log(this.selectedCertificates)
+        console.log(this.certificates)
+      });
+    }
 
   }
 
