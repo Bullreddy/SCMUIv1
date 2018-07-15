@@ -94,8 +94,9 @@ data=JSON.parse(JSON.stringify(data));
 
   rowDoubleClick(rowEvent) {
       alert('Double clicked: ' + rowEvent.row.item.name);
-      this.sharedService.setItemValue(rowEvent.row.item.id);
+     
       this.router.navigate(['applicationform']) 
+      this.sharedService.setItemValue(rowEvent.row.item.id);
 
   }
 

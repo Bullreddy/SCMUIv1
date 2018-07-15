@@ -164,7 +164,7 @@ this.loadCertificates(this.admissionForm.value.scholarship)
     
      console.log(this.itemchange)
      console.log(user)
-     this.resetForm();
+this. showValidationErrors();
      this.admissionForm.patchValue({
        admissionNo:this.itemchange
      });
