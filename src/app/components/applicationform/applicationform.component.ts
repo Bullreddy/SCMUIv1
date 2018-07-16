@@ -58,6 +58,7 @@ itemchange:number;
       console.log(this.admissionForm.value)
    if(val!=null ) {
        this.classificationService.getFormByNumber(this.admissionForm.value).subscribe(res => {
+          this.paramAdmissionNo = null
           if(res!=null){
             this.admissionForm.patchValue(res)
             this.btnState="Update";
