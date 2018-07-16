@@ -63,11 +63,6 @@ itemchange:number;
             this.btnState="Update";
             this.selectedCertificates = res['certificateIds']
             this.loadCertificates(this.admissionForm.value.scholarship)
-          }else{
-            this.resetForm();
-            this.admissionForm.patchValue({
-              admissionNo:val
-            });
           }
         })
     }

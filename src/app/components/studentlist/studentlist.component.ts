@@ -22,9 +22,9 @@ export class StudentlistComponent implements OnInit {
   limits = [10, 20, 40, 80];
 
   public phases: Array<{name: string, id: number}> = [];
-  phase:number=3;
-  academicYear:number=5;
-  trade:number=7;
+  phase:number;
+  academicYear:number;
+  trade:number;
   public trades: Array<{name: string, id: number}> = [];
  
   public academicYears: Array<{name: string, id: number}> = [];
