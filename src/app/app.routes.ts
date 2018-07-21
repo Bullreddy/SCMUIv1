@@ -7,6 +7,7 @@ import { ContactComponent } from './components/contact/contact.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { BranchComponent } from './components/branch/branch.component';
 import { ApplayoutComponent } from './components/applayout/applayout.component';
+import { FeedetailsComponent } from './components/feedetails/feedetails.component';
 import {AuthGuard} from './auth.gaurd';
 /**
  * All the routes for our application
@@ -20,7 +21,7 @@ const routes: Routes = [
 			children: [
 				{ path: 'dashboard', component: DashboardComponent,canActivate: [AuthGuard],data: {title: 'Dashboard'}},
 				{ path: 'applicationform', component: ApplicationformComponent,canActivate: [AuthGuard],data: {title: 'ApplicationForm'}},
-				{ path: 'services', component: ServicesComponent,canActivate: [AuthGuard],data: {title: 'Service'}},
+				{ path: 'feedetails', component: FeedetailsComponent,canActivate: [AuthGuard],data: {title: 'Fee Details'}},
 				{ path: 'studentlist', component: StudentlistComponent,canActivate: [AuthGuard],data: {title: 'StudentList'}},
 				{ path: 'contact', component: ContactComponent,canActivate: [AuthGuard],data: {title: 'Contact'}}
 			]

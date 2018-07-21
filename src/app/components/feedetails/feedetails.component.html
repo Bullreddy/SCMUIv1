@@ -1,0 +1,102 @@
+
+<div class="row">
+  <div class="col-md-12">
+
+  <!-- BEGIN SAMPLE FORM PORTLET-->
+  <div class="portlet light bordered">
+      <div class="portlet-title">
+          <div class="caption font-red-sunglo">
+              <i class="icon-settings font-red-sunglo"></i>
+              <span class="caption-subject bold uppercase">Fee Details</span>
+          </div>    
+      </div>
+      <div class="portlet-body">
+          <div class="row">
+              <div class="col-xs-6">
+                      <label for="academicYear" class="col-sm-4 control-label">Academic Year</label>
+                  <select class="form-control width200 inlineblock"  (change)="setFilter($event)" [(ngModel)]="academicYear">
+                      <option *ngFor="let academicYear of academicYears" value="{{academicYear.id}}">{{academicYear.name}}</option>
+                  </select>
+              </div>
+              <div class="col-xs-6">
+                  <label for="phase" class="col-sm-4 control-label">Phase</label>
+                  <select class="form-control width200 inlineblock" (change)="setFilter($event)" [(ngModel)]="phase" >
+                      <option *ngFor="let phase of phases" value="{{phase.id}}">{{phase.name}}</option>
+                  </select>
+              </div>
+          </div>
+          <div class="row">
+
+          <div class="col-xs-6">
+                  <label for="trade" class="col-sm-4 control-label">Trade</label>
+                  <select class="form-control width200 inlineblock" (change)="setFilter($event)" [(ngModel)]="trade" >
+                      <option *ngFor="let trade of trades" value="{{trade.id}}">{{trade.name}}</option>
+                  </select>  
+              </div>
+          </div>
+
+<div class="row"><div class="col-xs-12">
+<data-table width="100%"
+    [items]="items"
+    [itemCount]="itemCount"
+    [pageLimits]="limits"
+    [selectColumn]="true"
+    [pagination]="true"
+    [selectOnRowClick]="true"
+    [footerHeight]="50"
+    (reload)="reloadItems($event)"
+    (rowClick)="rowClick($event)"
+    (rowDoubleClick)="rowDoubleClick($event)"
+    [rowTooltip]="rowTooltip" >
+    <data-table-column
+        [property]="'name'"
+        [header]="'Name'"
+        [sortable]="true"
+        [resizable]="true">
+    </data-table-column>
+    <data-table-column
+        [property]="'fatherName'"
+        [header]="'Father Name'"
+        [sortable]="true">
+    </data-table-column>
+    <data-table-column
+        [property]="'dob'"
+        [header]="'DOB'"
+        [sortable]="true"
+      
+        [resizable]="true">
+        <ng-template #dataTableCell let-item="item">
+          <span *ngIf="item.dob">{{item.dob | date:"dd-MM-yyyy"}}</span>
+       </ng-template>
+    </data-table-column>
+    <data-table-column
+        [property]="'caste'"
+        [header]="'Caste'"
+        width="100px">
+        <ng-template #dataTableCell let-item="item">
+            <span *ngIf="item.casteID">{{item.caste.name}}</span>
+        </ng-template>
+    </data-table-column>
+    <data-table-column
+        property="scholarship"
+        header="Scholarship"
+        width="100px">
+    </data-table-column>
+    <data-table-column
+        property="year1"
+        header="Year1"
+        width="100px">
+    </data-table-column>
+    <data-table-column
+    property="year2"
+    header="Year2"
+    width="100px">
+</data-table-column>
+  </data-table>
+</div></div>
+      </div>
+      </div>
+      </div>
+      </div>
+
+

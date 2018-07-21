@@ -25,11 +25,12 @@ import {AuthGuard} from './auth.gaurd';
 import {TokenStorage} from './token.storage';
 import { BranchComponent } from './components/branch/branch.component';
 import {SharedService} from  './service/shared';
+import { FeedetailsComponent } from './components/feedetails/feedetails.component';
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,ApplicationformComponent,ServicesComponent,
-    ContactComponent, ApplayoutComponent, DashboardComponent, StudentlistComponent, BranchComponent
+    ContactComponent, ApplayoutComponent, DashboardComponent, StudentlistComponent, BranchComponent, FeedetailsComponent
    
  ],
   imports: [HttpModule, BrowserModule, FormsModule,routing,BrowserAnimationsModule, NgbModule.forRoot(),HttpClientModule,
