@@ -1,6 +1,6 @@
 import { Component, OnInit, Output, EventEmitter} from '@angular/core';
 import { DataTableResource } from 'angular5-data-table';
-import { StudentService } from '../../service/studentservice.service';
+import { FeeDetailService } from '../../service/feedetailService';
 import {SharedService} from '../../service/shared';
 
 import { ViewChild } from '@angular/core';
@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
   selector: 'app-feedetails',
   templateUrl: './feedetails.component.html',
   styleUrls: ['./feedetails.component.css'],
-  providers: [StudentService,ClassificationService]
+  providers: [FeeDetailService,ClassificationService]
 })
 export class FeedetailsComponent implements OnInit {
 
@@ -35,20 +35,19 @@ export class FeedetailsComponent implements OnInit {
 
   @ViewChild(DataTable) studentsable: DataTable;
 
-  constructor(private studentService :StudentService,private classificationService :ClassificationService,private router: Router) {
+  constructor(private feeDetailService :FeeDetailService,private classificationService :ClassificationService,private router: Router) {
 
  }
 
   ngOnInit(){
       
-    console.log(this.phases)
     this.showStudentList();
    
-    this.phases = this.studentService.phases;
+    this.phases = this.feeDetailService.phases;
  
-    this.trades = this.studentService.trades;
+    this.trades = this.feeDetailService.trades;
   
-    this.academicYears = this.studentService.academicYears;
+    this.academicYears = this.feeDetailService.academicYears;
        
     
   }
@@ -72,15 +71,14 @@ export class FeedetailsComponent implements OnInit {
       "academicYearID" : this.academicYear,
       "branchID" :branchID
     }
-    this.studentService.getStudents(params)
+      this.feeDetailService.getStudentFeeDetails(params)
       .subscribe(heroes => {
-          this.students = heroes;   
-     
-      
-        this.itemResource = new DataTableResource(this.students);
-        this.reloadItems('');
-        this.itemResource.count().then(count => this.itemCount = count);
-       
+    
+        this.students = heroes.studentDetails;   
+    
+      this.itemResource = new DataTableResource(this.students);
+      this.reloadItems('');
+      this.itemResource.count().then(count => this.itemCount = count);
       }
       );
   }
@@ -94,8 +92,8 @@ export class FeedetailsComponent implements OnInit {
 
 
   rowDoubleClick(rowEvent) {
-    console.log('Clicked: ' + rowEvent.row.item.admissionNo);
-    this.router.navigate(['applicationform'],{ queryParams: { admissionNo: rowEvent.row.item.admissionNo} })
+  //  console.log('Clicked: ' + rowEvent.row.item.admissionNo);
+   // this.router.navigate(['applicationform'],{ queryParams: { admissionNo: rowEvent.row.item.admissionNo} })
 
   }
 
@@ -103,20 +101,6 @@ export class FeedetailsComponent implements OnInit {
     return item.jobTitle;
   }
 
-  exportStudents(){
-    this.studentsable.selectedRows.forEach(row =>{
-      this.selectedStudents.push(row.item.id)
-    })
-    const params = {
-      "phaseID" : this.phase,
-      "tradeID" : this.trade,
-      "academicYearID" : this.academicYear,
-      "branchID" :this.classificationService.branchID,
-      "students" : this.selectedStudents
-    }
-   
 
-    this.studentService.downloadFile(params)
-  }
 
 }

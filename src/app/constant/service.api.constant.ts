@@ -19,7 +19,8 @@ export class ServiceApi {
 		'login':'token/generate-token',
 		'getBranches':'services/rest/classification/getBranches',
 		'getCertificates':'services/rest/classifications/getCertificates',
-		'getStudent':'student/applyfilter'
+		'getStudent':'student/applyfilter',
+		'getStudentFeeDetails':'fee/getStudentFeeDetails',
 	}
 	public urlMethod(url: string) {
 		console.log('port'+this.document.location.protocol+' host '+this.document.location.hostname)
